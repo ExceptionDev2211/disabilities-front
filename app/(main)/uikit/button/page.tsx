@@ -67,6 +67,7 @@ const ButtonDemo = () => {
                         <Button label="Submit"></Button>
                         <Button label="Disabled" disabled></Button>
                         <Button label="Link" link></Button>
+                        <div>Hola mundo!</div>
                     </div>
                 </div>
 
