@@ -13,7 +13,7 @@ import { Demo } from '@/types';
 import { ChartData, ChartOptions } from 'chart.js';
 
 const lineData: ChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
     datasets: [
         {
             label: 'First Dataset',
@@ -126,6 +126,7 @@ const Dashboard = () => {
 
     return (
         <div className="grid">
+            <h1>Holaaaaaaaaaaa</h1>
             <div className="col-12 lg:col-6 xl:col-3">
                 <div className="card mb-0">
                     <div className="flex justify-content-between mb-3">
