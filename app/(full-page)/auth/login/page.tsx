@@ -169,13 +169,7 @@ const LoginPage = () => {
                                         <Button 
                                             label="Continuar" 
                                             className="flex-1 p-3 text-xl" 
-                                            onClick={() => {
-                                                // Aquí puedes agregar la lógica para procesar la incapacidad
-                                                console.log('Tipo de documento:', tipoDocumento);
-                                                console.log('Número de documento:', numeroTarjeta);
-                                                console.log('Fecha de nacimiento:', fechaNacimiento);
-                                                // router.push('/incapacidad'); // o la ruta que necesites
-                                            }}
+                                            onClick={() => router.push('/')}
                                         />
                                     </div>
                                 </>
