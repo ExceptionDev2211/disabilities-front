@@ -15,6 +15,10 @@ const AppMenu = () => {
             label: 'Home',
             items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' }]
         },
+         {
+            label: 'Radicar incapacidad',
+            items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/filing' }]
+        },
         {
             label: 'UI Components',
             items: [
