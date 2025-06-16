@@ -16,11 +16,11 @@ const Filing = () => {
                 <form action="">
                     <div className="p-fluid formgrid grid">
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="firstname2">Primer nombre</label>
+                            <label htmlFor="firstname2">Primer nombre:</label>
                             <InputText id="firstname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Segundo nombre</label>
+                            <label htmlFor="lastname2">Segundo nombre:</label>
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
@@ -32,7 +32,7 @@ const Filing = () => {
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-2">
-                            <label htmlFor="lastname2">Tipo de documento: </label>
+                            <label htmlFor="lastname2">Tipo de documento:  </label>
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-4">
@@ -44,18 +44,18 @@ const Filing = () => {
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Correo electronico:  </label>
+                            <label htmlFor="lastname2">Correo electrónico:  </label>
                             <InputText id="lastname2" type="text" />
-                        </div>
+                        </div>                        
                          <div className="field col-12 md:col-6">
                             <label htmlFor="lastname2">Fecha de inicio de la incapacidad:  </label>
                             <Calendar showIcon id="lastname2"/>
                         </div>
-                        <div className="field col-12">
-                            <label htmlFor="address">Observaciones: </label>
-                            <InputTextarea id="address" rows={4} autoResize />
+                          <div className="field col-12 md:col-6">
+                            <label htmlFor="lastname2">EPS afiliada: </label>
+                            <InputText id="lastname2" type="text" />
                         </div>
-                        <div className="field col-12">
+                         <div className="field col-12">
                             <label>Adjuntar incapacidad: </label>
                             <FileUpload
                                 name="soporte"
@@ -76,6 +76,11 @@ const Filing = () => {
                                 emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>}
                             />
                         </div>
+                        <div className="field col-12">
+                            <label htmlFor="address">Observaciones: </label>
+                            <InputTextarea id="address" rows={4} autoResize />
+                        </div>
+                       
                         <div className=" justify mt-2">
                             <Button label="Radicar Incapacidad" icon="pi pi-check" />
                         </div>
