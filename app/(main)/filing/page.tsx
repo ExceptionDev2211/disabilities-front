@@ -71,7 +71,7 @@ const Filing = () => {
                                 name="soporte"
                                 url={'/api/upload'}
                                 accept="image/*,application/pdf"
-                                maxFileSize={1000000} 
+                                maxFileSize={2000000} 
                                 multiple
                                 emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>}
                             />
