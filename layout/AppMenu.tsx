@@ -13,7 +13,7 @@ const AppMenu = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Gestión de incapacidades',
-            items: [{ label: 'Radicar incapacidad', icon: 'pi pi-fw pi-home', to: '/filing' }]
+            items: [{ label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' }]
         }];
 
 
