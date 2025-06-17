@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -33,7 +33,7 @@ const ManagementFiling = () => {
         nombresApellidos: { value: null as string | null, matchMode: FilterMatchMode.STARTS_WITH },
         numeroDocumento: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
         estado: { value: null as string | null, matchMode: FilterMatchMode.EQUALS },
-        epsAfiliada: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
+        epsAfiliada: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS }
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
 
@@ -132,7 +132,7 @@ const ManagementFiling = () => {
             nombresApellidos: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
             numeroDocumento: { value: null, matchMode: FilterMatchMode.CONTAINS },
             estado: { value: null, matchMode: FilterMatchMode.EQUALS },
-            epsAfiliada: { value: null, matchMode: FilterMatchMode.CONTAINS },
+            epsAfiliada: { value: null, matchMode: FilterMatchMode.CONTAINS }
         });
         setGlobalFilterValue('');
     };
@@ -141,24 +141,12 @@ const ManagementFiling = () => {
         return (
             <div className="flex flex-column sm:flex-row sm:align-items-center gap-3 p-4">
                 <div className="flex align-items-center gap-2 flex-1">
-                    <Button 
-                        type="button" 
-                        icon="pi pi-filter-slash" 
-                        label="Limpiar" 
-                        outlined 
-                        onClick={clearFilter} 
-                        className="p-button-sm"
-                    />
+                    <Button type="button" icon="pi pi-filter-slash" label="Limpiar" outlined onClick={clearFilter} className="p-button-sm" />
                 </div>
                 <div className="flex align-items-center gap-2">
                     <span className="p-input-icon-left">
                         <i className="pi pi-search" />
-                        <InputText 
-                            value={globalFilterValue} 
-                            onChange={onGlobalFilterChange} 
-                            placeholder="Buscar en todos los campos..." 
-                            className="p-inputtext-sm"
-                        />
+                        <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar en todos los campos..." className="p-inputtext-sm" />
                     </span>
                 </div>
             </div>
@@ -168,11 +156,16 @@ const ManagementFiling = () => {
     const estadoBodyTemplate = (rowData: Incapacidad) => {
         const getSeverity = (estado: string) => {
             switch (estado) {
-                case 'Pagado': return 'success';
-                case 'Pendiente': return 'warning';
-                case 'En Revisión': return 'info';
-                case 'No Pagado': return 'danger';
-                default: return 'info';
+                case 'Pagado':
+                    return 'success';
+                case 'Pendiente':
+                    return 'warning';
+                case 'En Revisión':
+                    return 'info';
+                case 'No Pagado':
+                    return 'danger';
+                default:
+                    return 'info';
             }
         };
 
@@ -213,90 +206,33 @@ const ManagementFiling = () => {
     const observacionesBodyTemplate = (rowData: Incapacidad) => {
         const maxLength = 50;
         const observaciones = rowData.observaciones || '';
-        
+
         if (observaciones.length <= maxLength) {
             return <span className="text-sm">{observaciones || 'Sin observaciones'}</span>;
         }
-        
+
         return (
             <div className="text-sm">
-                <span title={observaciones}>
-                    {observaciones.substring(0, maxLength)}...
-                </span>
+                <span title={observaciones}>{observaciones.substring(0, maxLength)}...</span>
             </div>
         );
     };
 
     const estadoFilterTemplate = (options: any) => {
-        return (
-            <Dropdown 
-                value={options.value} 
-                options={estadosOptions} 
-                onChange={(e) => options.filterCallback(e.value, options.index)} 
-                placeholder="Seleccionar estado"
-                className="p-column-filter"
-                showClear
-            />
-        );
+        return <Dropdown value={options.value} options={estadosOptions} onChange={(e) => options.filterCallback(e.value, options.index)} placeholder="Seleccionar estado" className="p-column-filter" showClear />;
     };
 
     const fechaBodyTemplate = (rowData: Incapacidad, field: string) => {
-        const fecha = field === 'fechaNacimiento' ? rowData.fechaNacimiento : 
-                     field === 'fechaInicioIncapacidad' ? rowData.fechaInicioIncapacidad : 
-                     rowData.fechaRadicacion;
+        const fecha = field === 'fechaNacimiento' ? rowData.fechaNacimiento : field === 'fechaInicioIncapacidad' ? rowData.fechaInicioIncapacidad : rowData.fechaRadicacion;
         return fecha.toLocaleDateString('es-CO');
     };
 
     const documentosBodyTemplate = (rowData: Incapacidad) => {
         return (
             <div className="flex gap-2">
-                <Button 
-                    icon="pi pi-file-pdf" 
-                    className="p-button-rounded p-button-text p-button-sm" 
-                    tooltip="Incapacidad médica"
-                    tooltipOptions={{ position: 'top' }}
-                />
-                {rowData.tieneHistoriaClinica && (
-                    <Button 
-                        icon="pi pi-file-medical" 
-                        className="p-button-rounded p-button-text p-button-sm p-button-success" 
-                        tooltip="Historia clínica"
-                        tooltipOptions={{ position: 'top' }}
-                    />
-                )}
-                {rowData.tieneDocumentosAdicionales && (
-                    <Button 
-                        icon="pi pi-paperclip" 
-                        className="p-button-rounded p-button-text p-button-sm p-button-info" 
-                        tooltip="Documentos adicionales"
-                        tooltipOptions={{ position: 'top' }}
-                    />
-                )}
-            </div>
-        );
-    };
-
-    const accionesBodyTemplate = (rowData: Incapacidad) => {
-        return (
-            <div className="flex gap-2">
-                <Button 
-                    icon="pi pi-eye" 
-                    className="p-button-rounded p-button-text p-button-sm" 
-                    tooltip="Ver detalles"
-                    tooltipOptions={{ position: 'top' }}
-                />
-                <Button 
-                    icon="pi pi-pencil" 
-                    className="p-button-rounded p-button-text p-button-sm p-button-warning" 
-                    tooltip="Editar"
-                    tooltipOptions={{ position: 'top' }}
-                />
-                <Button 
-                    icon="pi pi-download" 
-                    className="p-button-rounded p-button-text p-button-sm p-button-success" 
-                    tooltip="Descargar"
-                    tooltipOptions={{ position: 'top' }}
-                />
+                <Button icon="pi pi-file-pdf" className="p-button-rounded p-button-text p-button-sm" tooltip="Incapacidad médica" tooltipOptions={{ position: 'top' }} />
+                {rowData.tieneHistoriaClinica && <Button icon="pi pi-file-medical" className="p-button-rounded p-button-text p-button-sm p-button-success" tooltip="Historia clínica" tooltipOptions={{ position: 'top' }} />}
+                {rowData.tieneDocumentosAdicionales && <Button icon="pi pi-paperclip" className="p-button-rounded p-button-text p-button-sm p-button-info" tooltip="Documentos adicionales" tooltipOptions={{ position: 'top' }} />}
             </div>
         );
     };
@@ -309,7 +245,7 @@ const ManagementFiling = () => {
                 <h2 className="text-900 font-semibold text-xl mb-2">Gestión de Incapacidades</h2>
                 <p className="text-600 line-height-3 m-0">Administre y revise las solicitudes de incapacidad médica</p>
             </div>
-            
+
             <div className="card">
                 <DataTable
                     value={incapacidades}
@@ -328,118 +264,19 @@ const ManagementFiling = () => {
                     removableSort
                     showGridlines
                 >
-                    <Column 
-                        field="id" 
-                        header="N° Incapacidad" 
-                        sortable 
-                        filter
-                        filterPlaceholder="Buscar por ID"
-                        style={{ minWidth: '180px' }}
-                        headerStyle={{ width: '180px' }}
-                    />
-                    <Column 
-                        field="nombresApellidos" 
-                        header="Nombres y Apellidos" 
-                        sortable 
-                        filter 
-                        filterPlaceholder="Buscar por nombre"
-                        style={{ minWidth: '220px' }}
-                    />
-                    <Column 
-                        field="tipoDocumento" 
-                        header="Tipo Doc." 
-                        sortable 
-                        filter
-                        filterPlaceholder="Tipo"
-                        style={{ minWidth: '100px' }}
-                        headerStyle={{ width: '100px' }}
-                    />
-                    <Column 
-                        field="numeroDocumento" 
-                        header="N° Documento" 
-                        sortable 
-                        filter
-                        filterPlaceholder="Buscar documento"
-                        style={{ minWidth: '140px' }}
-                    />
-                    <Column 
-                        field="fechaNacimiento" 
-                        header="Fecha Nac." 
-                        sortable 
-                        body={(rowData) => fechaBodyTemplate(rowData, 'fechaNacimiento')}
-                        style={{ minWidth: '120px' }}
-                        headerStyle={{ width: '120px' }}
-                    />
-                    <Column 
-                        header="Contacto" 
-                        body={contactoBodyTemplate}
-                        filter
-                        filterField="correoElectronico"
-                        filterPlaceholder="Buscar contacto"
-                        style={{ minWidth: '220px' }}
-                    />
-                    <Column 
-                        field="epsAfiliada" 
-                        header="EPS" 
-                        sortable 
-                        filter
-                        filterPlaceholder="Buscar EPS"
-                        style={{ minWidth: '160px' }}
-                    />
-                    <Column 
-                        field="salarioEmpleado" 
-                        header="Salario" 
-                        sortable 
-                        body={salarioBodyTemplate}
-                        style={{ minWidth: '140px' }}
-                        headerStyle={{ width: '140px' }}
-                    />
-                    <Column 
-                        field="observaciones" 
-                        header="Observaciones" 
-                        filter
-                        filterPlaceholder="Buscar observaciones"
-                        body={observacionesBodyTemplate}
-                        style={{ minWidth: '200px' }}
-                    />
-                    <Column 
-                        field="fechaInicioIncapacidad" 
-                        header="Inicio Incap." 
-                        sortable 
-                        body={(rowData) => fechaBodyTemplate(rowData, 'fechaInicioIncapacidad')}
-                        style={{ minWidth: '130px' }}
-                        headerStyle={{ width: '130px' }}
-                    />
-                    <Column 
-                        field="fechaRadicacion" 
-                        header="Fecha Rad." 
-                        sortable 
-                        body={(rowData) => fechaBodyTemplate(rowData, 'fechaRadicacion')}
-                        style={{ minWidth: '120px' }}
-                        headerStyle={{ width: '120px' }}
-                    />
-                    <Column 
-                        field="estado" 
-                        header="Estado" 
-                        sortable 
-                        filter
-                        filterElement={estadoFilterTemplate}
-                        body={estadoBodyTemplate}
-                        style={{ minWidth: '140px' }}
-                        headerStyle={{ width: '140px' }}
-                    />
-                    <Column 
-                        header="Documentos" 
-                        body={documentosBodyTemplate}
-                        style={{ minWidth: '140px' }}
-                        headerStyle={{ width: '140px' }}
-                    />
-                    <Column 
-                        header="Acciones" 
-                        body={accionesBodyTemplate}
-                        style={{ minWidth: '140px' }}
-                        headerStyle={{ width: '140px' }}
-                    />
+                    <Column field="id" header="N° Incapacidad" sortable filter filterPlaceholder="Buscar por ID" style={{ minWidth: '180px' }} headerStyle={{ width: '180px' }} />
+                    <Column field="nombresApellidos" header="Nombres y Apellidos" sortable filter filterPlaceholder="Buscar por nombre" style={{ minWidth: '220px' }} />
+                    <Column field="tipoDocumento" header="Tipo Doc." sortable filter filterPlaceholder="Tipo" style={{ minWidth: '100px' }} headerStyle={{ width: '100px' }} />
+                    <Column field="numeroDocumento" header="N° Documento" sortable filter filterPlaceholder="Buscar documento" style={{ minWidth: '140px' }} />
+                    <Column field="fechaNacimiento" header="Fecha Nac." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaNacimiento')} style={{ minWidth: '120px' }} headerStyle={{ width: '120px' }} />
+                    <Column header="Contacto" body={contactoBodyTemplate} filter filterField="correoElectronico" filterPlaceholder="Buscar contacto" style={{ minWidth: '220px' }} />
+                    <Column field="epsAfiliada" header="EPS" sortable filter filterPlaceholder="Buscar EPS" style={{ minWidth: '160px' }} />
+                    <Column field="salarioEmpleado" header="Salario" sortable body={salarioBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
+                    <Column field="observaciones" header="Observaciones" filter filterPlaceholder="Buscar observaciones" body={observacionesBodyTemplate} style={{ minWidth: '200px' }} />
+                    <Column field="fechaInicioIncapacidad" header="Inicio Incap." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaInicioIncapacidad')} style={{ minWidth: '130px' }} headerStyle={{ width: '130px' }} />
+                    <Column field="fechaRadicacion" header="Fecha Rad." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaRadicacion')} style={{ minWidth: '120px' }} headerStyle={{ width: '120px' }} />
+                    <Column field="estado" header="Estado" sortable filter filterElement={estadoFilterTemplate} body={estadoBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
+                    <Column header="Documentos" body={documentosBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                 </DataTable>
             </div>
         </div>
