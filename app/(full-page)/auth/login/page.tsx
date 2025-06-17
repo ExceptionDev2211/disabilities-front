@@ -20,15 +20,21 @@ const LoginPage = () => {
     const [fechaNacimiento, setFechaNacimiento] = useState<Date | null>(null);
     const { layoutConfig } = useContext(LayoutContext);
     const router = useRouter();
-    
+
     const tiposDocumento = [
         { label: 'Cédula de Ciudadanía', value: 'CC' },
         { label: 'Cédula de Extranjería', value: 'CE' },
-        { label: 'Tarjeta de Identidad', value: 'TI' },
+        { label: 'Certificado de Nacido Vivo', value: 'CNV' },
+        { label: 'NIT', value: 'NIT' },
+        { label: 'Pasaporte', value: 'PP' },
+        { label: 'Pasaporte de la ONU', value: 'PNU' },
+        { label: 'Permiso Especial de Permanencia', value: 'PEP' },
+        { label: 'Permiso Protección Temporal', value: 'PPT' },
         { label: 'Registro Civil', value: 'RC' },
-        { label: 'Pasaporte', value: 'PP' }
+        { label: 'Salvoconducto de Permanencia', value: 'SP' },
+        { label: 'Tarjeta de Identidad', value: 'TI' }
     ];
-    
+
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
     const handleRadicarIncapacidad = () => {
@@ -41,7 +47,7 @@ const LoginPage = () => {
         setNumeroTarjeta('');
         setFechaNacimiento(null);
     };
-   
+
     return (
         <div className={containerClassName}>
             <div className="flex flex-column align-items-center justify-content-center">
@@ -54,15 +60,9 @@ const LoginPage = () => {
                 >
                     <div className="w-full surface-card py-8 px-5 sm:px-8" style={{ borderRadius: '53px' }}>
                         <div className="text-center mb-5">
-                            {!showIncapacidadForm && (
-                                <div className="text-800 text-3xl font-medium mb-3">¡Bienvenido!</div>
-                            )}
-                            <div className="text-800 text-3xl font-medium mb-3">
-                                {showIncapacidadForm ? 'Radicar Incapacidad' : 'Al sistema de gestión de incapacidades'}
-                            </div>
-                            <span className="text-600 font-medium">
-                                {showIncapacidadForm ? 'Complete los siguientes datos' : 'Inicia sesión para continuar'}
-                            </span>
+                            {!showIncapacidadForm && <div className="text-800 text-3xl font-medium mb-3">¡Bienvenido!</div>}
+                            <div className="text-800 text-3xl font-medium mb-3">{showIncapacidadForm ? 'Radicar Incapacidad' : 'Al sistema de gestión de incapacidades'}</div>
+                            <span className="text-600 font-medium">{showIncapacidadForm ? 'Complete los siguientes datos' : 'Inicia sesión para continuar'}</span>
                         </div>
                         <div>
                             {!showIncapacidadForm ? (
@@ -71,50 +71,22 @@ const LoginPage = () => {
                                     <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                                         Email
                                     </label>
-                                    <InputText 
-                                        id="email1" 
-                                        type="text" 
-                                        placeholder="Ingrese su correo electrónico" 
-                                        className="w-full md:w-30rem mb-5" 
-                                        style={{ padding: '1rem' }} 
-                                    />
+                                    <InputText id="email1" type="text" placeholder="Ingrese su correo electrónico" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
                                     <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                                         Contraseña
                                     </label>
-                                    <Password 
-                                        inputId="password1" 
-                                        value={password} 
-                                        onChange={(e) => setPassword(e.target.value)} 
-                                        placeholder="Ingrese su contraseña" 
-                                        toggleMask 
-                                        className="w-full mb-5" 
-                                        inputClassName="w-full p-3 md:w-30rem"
-                                    />
+                                    <Password inputId="password1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingrese su contraseña" toggleMask className="w-full mb-5" inputClassName="w-full p-3 md:w-30rem" />
                                     <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                         <div className="flex align-items-center">
-                                            <Checkbox 
-                                                inputId="rememberme1" 
-                                                checked={checked} 
-                                                onChange={(e) => setChecked(e.checked ?? false)} 
-                                                className="mr-2"
-                                            />
+                                            <Checkbox inputId="rememberme1" checked={checked} onChange={(e) => setChecked(e.checked ?? false)} className="mr-2" />
                                             <label htmlFor="rememberme1">Recordarme</label>
                                         </div>
                                         <a className="font-medium no-underline ml-2 text-right cursor-pointer" style={{ color: 'var(--primary-color)' }}>
                                             ¿Olvidaste tu contraseña?
                                         </a>
                                     </div>
-                                    <Button 
-                                        label="Iniciar Sesión" 
-                                        className="w-full p-3 text-xl mb-3" 
-                                        onClick={() => router.push('/')}
-                                    />
-                                    <Button 
-                                        label="Radicar incapacidad" 
-                                        className="w-full p-3 text-xl mb-3" 
-                                        onClick={handleRadicarIncapacidad}
-                                        severity="secondary"
-                                    />
+                                    <Button label="Iniciar Sesión" className="w-full p-3 text-xl mb-3" onClick={() => router.push('/')} />
+                                    <Button label="Radicar incapacidad" className="w-full p-3 text-xl mb-3" onClick={handleRadicarIncapacidad} severity="secondary" />
                                 </>
                             ) : (
                                 // Formulario de incapacidad
@@ -122,24 +94,23 @@ const LoginPage = () => {
                                     <label htmlFor="tipoDocumento" className="block text-900 text-xl font-medium mb-2">
                                         Tipo de Documento
                                     </label>
-                                    <Dropdown 
+                                    <Dropdown
                                         id="tipoDocumento"
-                                        value={tipoDocumento} 
-                                        onChange={(e) => setTipoDocumento(e.value)} 
-                                        options={tiposDocumento} 
+                                        value={tipoDocumento}
+                                        onChange={(e) => setTipoDocumento(e.value)}
+                                        options={tiposDocumento}
                                         placeholder="Seleccione tipo de documento"
                                         className="w-full md:w-30rem mb-5"
-                                        panelClassName="w-full"
                                     />
                                     
                                     <label htmlFor="numeroTarjeta" className="block text-900 text-xl font-medium mb-2">
                                         Número de Documento
                                     </label>
-                                    <InputText 
-                                        id="numeroTarjeta" 
-                                        type="text" 
-                                        placeholder="Ingrese su número de identificación" 
-                                        className="w-full md:w-30rem mb-5" 
+                                    <InputText
+                                        id="numeroTarjeta"
+                                        type="text"
+                                        placeholder="Ingrese su número de identificación"
+                                        className="w-full md:w-30rem mb-5"
                                         style={{ padding: '1rem' }}
                                         value={numeroTarjeta}
                                         onChange={(e) => setNumeroTarjeta(e.target.value)}
@@ -147,10 +118,10 @@ const LoginPage = () => {
                                     <label htmlFor="fechaNacimiento" className="block text-900 font-medium text-xl mb-2">
                                         Fecha de Nacimiento
                                     </label>
-                                    <Calendar 
+                                    <Calendar
                                         id="fechaNacimiento"
-                                        value={fechaNacimiento} 
-                                        onChange={(e) => setFechaNacimiento(e.value || null)} 
+                                        value={fechaNacimiento}
+                                        onChange={(e) => setFechaNacimiento(e.value || null)}
                                         placeholder="Seleccione su fecha de nacimiento"
                                         className="w-full mb-5"
                                         inputClassName="w-full p-3 md:w-30rem"
@@ -159,18 +130,8 @@ const LoginPage = () => {
                                         maxDate={new Date()}
                                     />
                                     <div className="flex gap-3">
-                                        <Button 
-                                            label="Volver" 
-                                            className="flex-1 p-3 text-xl" 
-                                            onClick={handleVolver}
-                                            severity="secondary"
-                                            outlined
-                                        />
-                                        <Button 
-                                            label="Continuar" 
-                                            className="flex-1 p-3 text-xl" 
-                                            onClick={() => router.push('/')}
-                                        />
+                                        <Button label="Volver" className="flex-1 p-3 text-xl" onClick={handleVolver} severity="secondary" outlined />
+                                        <Button label="Continuar" className="flex-1 p-3 text-xl" onClick={() => router.push('/filing')} />
                                     </div>
                                 </>
                             )}
