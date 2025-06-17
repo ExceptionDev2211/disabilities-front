@@ -231,7 +231,7 @@ const ManagementFiling = () => {
         return (
             <div className="flex gap-2">
                 <Button icon="pi pi-file-pdf" className="p-button-rounded p-button-text p-button-sm" tooltip="Incapacidad médica" tooltipOptions={{ position: 'top' }} />
-                {rowData.tieneHistoriaClinica && <Button icon="pi pi-file-medical" className="p-button-rounded p-button-text p-button-sm p-button-success" tooltip="Historia clínica" tooltipOptions={{ position: 'top' }} />}
+                {rowData.tieneHistoriaClinica && <Button icon="pi pi-paperclip" className="p-button-rounded p-button-text p-button-sm p-button-success" tooltip="Historia clínica" tooltipOptions={{ position: 'top' }} />}
                 {rowData.tieneDocumentosAdicionales && <Button icon="pi pi-paperclip" className="p-button-rounded p-button-text p-button-sm p-button-info" tooltip="Documentos adicionales" tooltipOptions={{ position: 'top' }} />}
             </div>
         );
