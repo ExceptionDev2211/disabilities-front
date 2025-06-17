@@ -77,7 +77,7 @@ const LoginPage = () => {
             life: 3000
         });
         
-        // Pequeño delay para mostrar el toast antes de navegar
+        
         setTimeout(() => {
             router.push('/filing');
         }, 500);

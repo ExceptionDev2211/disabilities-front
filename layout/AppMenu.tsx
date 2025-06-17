@@ -13,8 +13,26 @@ const AppMenu = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Gestión de incapacidades',
-            items: [{ label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' }]
-        }];
+            items: [{ label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' },
+            { label: 'Radicaciones pendientes', icon: 'pi pi-exclamation-triangle', to: '/search' },
+            { label: 'Radicaciones en proceso', icon: 'pi pi-exclamation-circle', to: '/my-incapacities' },
+            { label: 'Radicaciones en finalizadas', icon: 'pi pi-check', to: '/my-incapacities' }
+
+            ]
+        },
+        {
+            label: 'Gestión de nómina',
+            items: [{ label: 'Cargar nómina', icon: 'pi pi-file-import', to: '/filing' },
+            { label: 'Visualizar nómina', icon: 'pi pi-search', to: '/search' },
+            ]
+        },
+        {
+            label: 'Control operativo',
+            items: [{ label: 'Crear reporte', icon: 'pi pi-chart-bar', to: '/filing' },
+            ]
+        },
+
+    ];
 
 
     return (
