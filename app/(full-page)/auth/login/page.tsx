@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 import { useRouter } from 'next/navigation';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
@@ -10,6 +10,7 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
+import { Toast } from 'primereact/toast';
 
 const LoginPage = () => {
     const [password, setPassword] = useState('');
@@ -20,6 +21,7 @@ const LoginPage = () => {
     const [fechaNacimiento, setFechaNacimiento] = useState<Date | null>(null);
     const { layoutConfig } = useContext(LayoutContext);
     const router = useRouter();
+    const toast = useRef<Toast>(null);
 
     const tiposDocumento = [
         { label: 'Cédula de Ciudadanía', value: 'CC' },
@@ -38,6 +40,12 @@ const LoginPage = () => {
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
     const handleRadicarIncapacidad = () => {
+        toast.current?.show({
+            severity: 'info',
+            summary: 'Radicar Incapacidad',
+            detail: 'Accediendo al formulario de radicación de incapacidad',
+            life: 3000
+        });
         setShowIncapacidadForm(true);
     };
 
@@ -48,8 +56,36 @@ const LoginPage = () => {
         setFechaNacimiento(null);
     };
 
+    const handleIniciarSesion = () => {
+        toast.current?.show({
+            severity: 'success',
+            summary: 'Inicio de Sesión',
+            detail: 'Iniciando sesión exitosamente',
+            life: 3000
+        });
+        
+        setTimeout(() => {
+            router.push('/');
+        }, 500);
+    };
+
+    const handleContinuar = () => {
+        toast.current?.show({
+            severity: 'success',
+            summary: 'Datos Validados',
+            detail: 'Continuando con el proceso de radicación',
+            life: 3000
+        });
+        
+        // Pequeño delay para mostrar el toast antes de navegar
+        setTimeout(() => {
+            router.push('/filing');
+        }, 500);
+    };
+
     return (
         <div className={containerClassName}>
+            <Toast ref={toast} />
             <div className="flex flex-column align-items-center justify-content-center">
                 <div
                     style={{
@@ -85,7 +121,7 @@ const LoginPage = () => {
                                             ¿Olvidaste tu contraseña?
                                         </a>
                                     </div>
-                                    <Button label="Iniciar Sesión" className="w-full p-3 text-xl mb-3" onClick={() => router.push('/')} />
+                                    <Button label="Iniciar Sesión" className="w-full p-3 text-xl mb-3" onClick={handleIniciarSesion} />
                                     <Button label="Radicar incapacidad" className="w-full p-3 text-xl mb-3" onClick={handleRadicarIncapacidad} severity="secondary" />
                                 </>
                             ) : (
@@ -131,7 +167,7 @@ const LoginPage = () => {
                                     />
                                     <div className="flex gap-3">
                                         <Button label="Volver" className="flex-1 p-3 text-xl" onClick={handleVolver} severity="secondary" outlined />
-                                        <Button label="Continuar" className="flex-1 p-3 text-xl" onClick={() => router.push('/filing')} />
+                                        <Button label="Continuar" className="flex-1 p-3 text-xl" onClick={handleContinuar} />
                                     </div>
                                 </>
                             )}
