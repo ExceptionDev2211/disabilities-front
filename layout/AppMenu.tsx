@@ -22,8 +22,8 @@ const AppMenu = () => {
         },
         {
             label: 'Gestión de nómina',
-            items: [{ label: 'Cargar nómina', icon: 'pi pi-file-import', to: '/filing' },
-            { label: 'Visualizar nómina', icon: 'pi pi-search', to: '/search' },
+            items: [{ label: 'Cargar nómina', icon: 'pi pi-file-import', to: '/loadPayroll' },
+            { label: 'Consulta de nómina', icon: 'pi pi-search', to: '/payrolls' },
             ]
         },
         {
