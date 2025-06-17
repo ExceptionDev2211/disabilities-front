@@ -13,11 +13,9 @@ const AppMenu = () => {
     const model: AppMenuItem[] = [
         {
             label: 'Gestión de incapacidades',
-            items: [{ label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' },
-            { label: 'Radicaciones pendientes', icon: 'pi pi-exclamation-triangle', to: '/search' },
-            { label: 'Radicaciones en proceso', icon: 'pi pi-exclamation-circle', to: '/my-incapacities' },
-            { label: 'Radicaciones en finalizadas', icon: 'pi pi-check', to: '/my-incapacities' }
-
+            items: [
+            { label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' },
+            { label: 'Radicaciones pendientes', icon: 'pi pi-exclamation-triangle', to: '/managementFiling' }
             ]
         },
         {
