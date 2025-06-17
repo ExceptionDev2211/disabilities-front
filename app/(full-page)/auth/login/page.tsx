@@ -77,7 +77,6 @@ const LoginPage = () => {
             life: 3000
         });
         
-        // Pequeño delay para mostrar el toast antes de navegar
         setTimeout(() => {
             router.push('/filing');
         }, 500);
@@ -102,7 +101,6 @@ const LoginPage = () => {
                         </div>
                         <div>
                             {!showIncapacidadForm ? (
-                                // Formulario de login original
                                 <>
                                     <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                                         Email
@@ -125,7 +123,6 @@ const LoginPage = () => {
                                     <Button label="Radicar incapacidad" className="w-full p-3 text-xl mb-3" onClick={handleRadicarIncapacidad} severity="secondary" />
                                 </>
                             ) : (
-                                // Formulario de incapacidad
                                 <>
                                     <label htmlFor="tipoDocumento" className="block text-900 text-xl font-medium mb-2">
                                         Tipo de Documento
