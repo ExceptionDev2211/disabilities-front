@@ -241,11 +241,12 @@ const ManagementFiling = () => {
 
     return (
         <div className="col-12">
+            <div className="mb-4">
+                <h2 className="text-900 font-semibold text-xl mb-2">Gestión de Incapacidades</h2>
+                <p className="text-600 line-height-3 m-0">Administre y revise las solicitudes de incapacidad médica</p>
+            </div>
+
             <div className="card">
-                <div className="mb-4">
-                    <h2 className="text-900 font-semibold text-xl mb-2">Gestión de Incapacidades</h2>
-                    <p className="text-600 line-height-3 m-0">Administre y revise las solicitudes de incapacidad médica</p>
-                </div>
                 <DataTable
                     value={incapacidades}
                     paginator
@@ -263,7 +264,9 @@ const ManagementFiling = () => {
                     removableSort
                     showGridlines
                 >
-                    <Column field="id" header="N° Incapacidad" sortable filter filterPlaceholder="Buscar por ID" style={{ minWidth: '180px' }} headerStyle={{ width: '180px' }} />
+                    <Column field="estado" header="Estado" sortable filter filterElement={estadoFilterTemplate} body={estadoBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
+                    <Column field="fechaRadicacion" header="Fecha Rad." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaRadicacion')} style={{ minWidth: '120px' }} headerStyle={{ width: '120px' }} />
+                    <Column field="id" header="N° Incapacidad" sortable style={{ minWidth: '180px' }} headerStyle={{ width: '180px' }} />
                     <Column field="nombresApellidos" header="Nombres y Apellidos" sortable filter filterPlaceholder="Buscar por nombre" style={{ minWidth: '220px' }} />
                     <Column field="tipoDocumento" header="Tipo Doc." sortable filter filterPlaceholder="Tipo" style={{ minWidth: '100px' }} headerStyle={{ width: '100px' }} />
                     <Column field="numeroDocumento" header="N° Documento" sortable filter filterPlaceholder="Buscar documento" style={{ minWidth: '140px' }} />
@@ -271,10 +274,8 @@ const ManagementFiling = () => {
                     <Column header="Contacto" body={contactoBodyTemplate} filter filterField="correoElectronico" filterPlaceholder="Buscar contacto" style={{ minWidth: '220px' }} />
                     <Column field="epsAfiliada" header="EPS" sortable filter filterPlaceholder="Buscar EPS" style={{ minWidth: '160px' }} />
                     <Column field="salarioEmpleado" header="Salario" sortable body={salarioBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
-                    <Column field="observaciones" header="Observaciones" filter filterPlaceholder="Buscar observaciones" body={observacionesBodyTemplate} style={{ minWidth: '200px' }} />
+                    <Column field="observaciones" header="Observaciones" body={observacionesBodyTemplate} style={{ minWidth: '200px' }} />
                     <Column field="fechaInicioIncapacidad" header="Inicio Incap." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaInicioIncapacidad')} style={{ minWidth: '130px' }} headerStyle={{ width: '130px' }} />
-                    <Column field="fechaRadicacion" header="Fecha Rad." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaRadicacion')} style={{ minWidth: '120px' }} headerStyle={{ width: '120px' }} />
-                    <Column field="estado" header="Estado" sortable filter filterElement={estadoFilterTemplate} body={estadoBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                     <Column header="Documentos" body={documentosBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                 </DataTable>
             </div>
