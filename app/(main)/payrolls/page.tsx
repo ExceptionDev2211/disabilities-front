@@ -175,7 +175,7 @@ const Payrolls = () => {
           </div>
         </TabPanel>
 
-        {/* TAB POR CEDULA */}
+        
         <TabPanel header="Por Cédula de Empleado">
           <div className="p-fluid grid formgrid">
             <div className="field col-12 md:col-4">
