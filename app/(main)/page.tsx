@@ -17,7 +17,7 @@ const Dashboard = () => {
    
     return (
         <div className="grid">
-          Hola
+          
         </div>
     );
 };
