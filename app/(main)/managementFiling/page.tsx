@@ -249,9 +249,7 @@ const ManagementFiling = () => {
     return (
         <div className="col-12">
             <div className="card">
-                <h2 className="text-900 font-semibold text-xl mb-2">Gestión de Incapacidades</h2>
-                <p className="text-600 line-height-3 m-3">Administre y revise las solicitudes de incapacidad médica</p>
-            
+                <h2 className="text-900 font-semibold text-xl mb-3">Gestión de Incapacidades</h2>
                 <DataTable
                     value={incapacidades}
                     paginator
