@@ -38,7 +38,7 @@ const LoadPayroll = () => {
             maxFileSize={1000000}
             emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>}
           />
-          <Button label='Creación manual' className='mt-5 mb-0' onClick={openDialog} />
+          <Button label='Creación manual' icon='pi pi-file-edit' className='mt-5 mb-0' onClick={openDialog} />
           <Dialog style={{ width: '70vw' }} visible={displayDialog} onHide={() => setDisplayDialog(false)} header="Creación manual de nómina de empresa">
             <div className="col-12 flex flex-col gap-3 align-items-center padding-10">
               <div className="p-fluid formgrid grid">
@@ -74,8 +74,6 @@ const LoadPayroll = () => {
                 </div>
               </div>
             </div>
-
-
             <Button label='Crear' className='mt-5 mb-0' />
           </Dialog>
         </div>
@@ -86,7 +84,7 @@ const LoadPayroll = () => {
           <label>Adjuntar nómina: </label>
           <FileUpload
             name="soporte"
-
+            
             url={'/api/upload'}
             accept="xlsx/csv"
             maxFileSize={1000000}
