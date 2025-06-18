@@ -40,10 +40,15 @@ const ManagementFiling = () => {
     const [globalFilterValue, setGlobalFilterValue] = useState('');
 
     const estadosOptions = [
-        { label: 'Pendiente', value: 'Pendiente' },
-        { label: 'En Revisión', value: 'En Revisión' },
-        { label: 'Pagado', value: 'Pagado' },
-        { label: 'No Pagado', value: 'No Pagado' }
+        { label: 'En trámite', value: 'En trámite' },
+        { label: 'Pagada', value: 'Pagada' },
+        { label: 'En proceso de pago', value: 'En proceso de pago' },
+        { label: 'Negada en gestión', value: 'Negada en gestión' },
+        { label: 'Negada no recuperable', value: 'Negada no recuperable' },
+        { label: 'Devolución', value: 'Devolución' },
+        { label: 'No cobrable 1/2', value: 'No cobrable 1/2' },
+        { label: 'Gestionada', value: 'Gestionada' },
+        { label: 'Revisión AlfaPlus', value: 'Revisión AlfaPlus' }
     ];
 
     useEffect(() => {
@@ -161,21 +166,30 @@ const ManagementFiling = () => {
     };
 
     const estadoBodyTemplate = (rowData: Incapacidad) => {
-        const getSeverity = (estado: string) => {
+        const getSeverity = (estado: string): 'success' | 'info' | 'warning' | 'danger' | null => {
             switch (estado) {
-                case 'Pagado':
+                case 'Pagada':
                     return 'success';
-                case 'Pendiente':
+                case 'En proceso de pago':
+                    return 'info';
+                case 'Revisión AlfaPlus':
+                    return 'info';
+                case 'En trámite':
+                    return 'info';
+                case 'Devolución':
                     return 'warning';
-                case 'En Revisión':
-                    return 'info';
-                case 'No Pagado':
+                case 'Negada en gestión':
+                    return 'warning';
+                case 'Negada no recuperable':
                     return 'danger';
-                default:
+                case 'Gestionada':
                     return 'info';
+                case 'No cobrable 1/2':
+                    return 'warning';
+                default:
+                    return null;
             }
         };
-
         return <Tag value={rowData.estado} severity={getSeverity(rowData.estado)} />;
     };
 
