@@ -18,16 +18,7 @@ const LoadPayroll = () => {
   ];
   const documentsTypes = [
     { label: 'Cédula de Ciudadanía', value: 'CC' },
-    { label: 'Cédula de Extranjería', value: 'CE' },
-    { label: 'Certificado de Nacido Vivo', value: 'CNV' },
     { label: 'NIT', value: 'NIT' },
-    { label: 'Pasaporte', value: 'PP' },
-    { label: 'Pasaporte de la ONU', value: 'PNU' },
-    { label: 'Permiso Especial de Permanencia', value: 'PEP' },
-    { label: 'Permiso Protección Temporal', value: 'PPT' },
-    { label: 'Registro Civil', value: 'RC' },
-    { label: 'Salvoconducto de Permanencia', value: 'SP' },
-    { label: 'Tarjeta de Identidad', value: 'TI' }
   ];
   const openDialog = () => {
     setDisplayDialog(true);
@@ -48,11 +39,11 @@ const LoadPayroll = () => {
             emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>}
           />
           <Button label='Creación manual' className='mt-5 mb-0' onClick={openDialog} />
-          <Dialog style={{ width: '70vw' }} visible={displayDialog} onHide={() => setDisplayDialog(false)} header="Creación manual">
+          <Dialog style={{ width: '70vw' }} visible={displayDialog} onHide={() => setDisplayDialog(false)} header="Creación manual de nómina de empresa">
             <div className="col-12 flex flex-col gap-3 align-items-center padding-10">
               <div className="p-fluid formgrid grid">
                 <div className="field col-12 md:col-6">
-                  <label htmlFor="firstname2">Tipo de documento:</label>
+                  <label htmlFor="firstname2">Tipo de identificación:</label>
                   <Dropdown id="tipoDocumento" value={documentType} onChange={(e) => setDocumentType(e.value)} options={documentsTypes}>
                   </Dropdown>
                 </div>
@@ -73,7 +64,14 @@ const LoadPayroll = () => {
                   <Dropdown id="arl" value={arlNames} onChange={(e) => setArlNames(e.value)} options={arlOptions}>
                   </Dropdown>
                 </div>
-
+                <div className="field col-12 md:col-6">
+                  <label htmlFor="firstname2">Correo de notificación:</label>
+                  <InputText id="firstname2" type="text" />
+                </div>
+                <div className="field col-12 md:col-6">
+                  <label htmlFor="firstname2">Teléfono de contacto:</label>
+                  <InputText id="firstname2" type="text" />
+                </div>
               </div>
             </div>
 

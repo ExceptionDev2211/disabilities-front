@@ -22,7 +22,7 @@ const Payrolls = () => {
   const [filtroNIT, setFiltroNIT] = useState('');
   const [globalFilterValue, setGlobalFilterValue] = useState('');
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
-  const [selectedEmpleado, setSelectedEmpleado] = useState<Empleado | null>(null); // NUEVO
+  const [selectedEmpleado, setSelectedEmployee] = useState<Empleado | null>(null); // NUEVO
 
   const [filters, setFilters] = useState({
     global: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
@@ -66,7 +66,7 @@ const Payrolls = () => {
           setGlobalFilterValue('');
           setFiltroNIT('');
           setDateRange([null, null]);
-          setSelectedEmpleado(null); // NUEVO
+          setSelectedEmployee(null); // NUEVO
         }}
       />
       <InputText
@@ -111,7 +111,7 @@ const Payrolls = () => {
     return <Tag value={row.estado} severity={sev} />;
   };
 
-  const fechaTemplate = (row: any, field: 'fechaCargue' | 'fechaRetiro') => (
+  const dateTemplate = (row: any, field: 'fechaCargue' | 'fechaRetiro') => (
     <span>{row[field] || '-'}</span>
   );
 
@@ -147,15 +147,15 @@ const Payrolls = () => {
           showGridlines
           selectionMode="single"
           onRowSelect={(e) => {
-            const empleadoSeleccionado = dummyData.find((emp) => emp.cedula === e.data.cedula);
-            setSelectedEmpleado(empleadoSeleccionado || null);
+            const selectedEmployee = dummyData.find((emp) => emp.cedula === e.data.cedula);
+            setSelectedEmployee(selectedEmployee || null);
           }}
         >
           <Column field="nombre" header="Empleado" sortable />
           <Column field="cedula" header="N° documento" sortable />
-          <Column field="estado" header="Estado" sortable body={estadoBody} />
-          <Column field="fechaCargue" header="Fecha Cargue" sortable body={(row) => fechaTemplate(row, 'fechaCargue')} />
-          <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => fechaTemplate(row, 'fechaRetiro')} />
+          <Column field="estado" header="Estado"  sortable body={estadoBody} />
+          <Column field="fechaCargue" header="Fecha Cargue" sortable body={(row) => dateTemplate(row, 'fechaCargue')} />
+          <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => dateTemplate(row, 'fechaRetiro')} />
           <Column field="centroCosto" header="Centro Costo" sortable />
           <Column field="eps" header="EPS" sortable />
           <Column field="salario" header="Salario" sortable body={salarioBody} />
@@ -176,7 +176,7 @@ const Payrolls = () => {
               emptyMessage="Sin historial"
             >
               <Column field="fechaCargue" header="Fecha Cargue"  />
-              <Column field="fechaRetiro" header="Fecha Retiro" body={(row) => fechaTemplate(row, 'fechaRetiro')} />
+              <Column field="fechaRetiro" header="Fecha Retiro" body={(row) => dateTemplate(row, 'fechaRetiro')} />
               <Column field="estado" header="Estado" body={estadoBody} />
               <Column field="centroCosto" header="Centro Costo" />
               <Column field="eps" header="EPS" />
