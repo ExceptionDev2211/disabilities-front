@@ -15,7 +15,7 @@ const AppMenu = () => {
             label: 'Gestión de incapacidades',
             items: [
             { label: 'Radicar incapacidad', icon: 'pi pi-file-edit', to: '/filing' },
-            { label: 'Gestión de incapacidades', icon: 'pi pi-exclamation-triangle', to: '/managementFiling' }
+            { label: 'Gestión de incapacidades', icon: 'pi pi-id-card', to: '/managementFiling' }
             ]
         },
         {
