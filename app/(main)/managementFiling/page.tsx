@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
@@ -27,6 +28,7 @@ interface Incapacidad {
 }
 
 const ManagementFiling = () => {
+    const router = useRouter();
     const [incapacidades, setIncapacidades] = useState<Incapacidad[]>([]);
     const [filters, setFilters] = useState({
         global: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
@@ -137,6 +139,11 @@ const ManagementFiling = () => {
         setGlobalFilterValue('');
     };
 
+    const onRowClick = (event: any) => {
+        const incapacidadId = event.data.id;
+        router.push(`/managementFiling/detailedFiling?id=${incapacidadId}`);
+    };
+
     const renderHeader = () => {
         return (
             <div className="flex flex-column sm:flex-row sm:align-items-center gap-3 p-4">
@@ -192,7 +199,7 @@ const ManagementFiling = () => {
     const salarioBodyTemplate = (rowData: Incapacidad) => {
         return (
             <div className="text-right">
-                <span className="font-semibold">
+                <span>
                     {new Intl.NumberFormat('es-CO', {
                         style: 'currency',
                         currency: 'COP',
@@ -241,12 +248,8 @@ const ManagementFiling = () => {
 
     return (
         <div className="col-12">
-            <div className="mb-4">
-                <h2 className="text-900 font-semibold text-xl mb-2">Gestión de Incapacidades</h2>
-                <p className="text-600 line-height-3 m-0">Administre y revise las solicitudes de incapacidad médica</p>
-            </div>
-
             <div className="card">
+                <h2 className="text-900 font-semibold text-xl mb-3">Gestión de Incapacidades</h2>
                 <DataTable
                     value={incapacidades}
                     paginator
@@ -263,6 +266,9 @@ const ManagementFiling = () => {
                     stripedRows
                     removableSort
                     showGridlines
+                    onRowClick={onRowClick}
+                    selectionMode="single"
+                    rowHover
                 >
                     <Column field="estado" header="Estado" sortable filter filterElement={estadoFilterTemplate} body={estadoBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                     <Column field="fechaRadicacion" header="Fecha Rad." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaRadicacion')} style={{ minWidth: '120px' }} headerStyle={{ width: '120px' }} />
