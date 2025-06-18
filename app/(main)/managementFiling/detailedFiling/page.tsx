@@ -43,6 +43,19 @@ export default function IncapacidadDetallePage() {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState<Incapacidad | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Hook para detectar el tamaño de la ventana
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // md breakpoint en PrimeReact
+        };
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
 
     const tipoDocumentoOptions = [
         { label: 'Cédula de Ciudadanía', value: 'CC' },
@@ -284,7 +297,7 @@ export default function IncapacidadDetallePage() {
                             </div>
                             <div className="col-12 md:col-3">
                                 <label htmlFor="tipoDocumento" className="block text-900 font-medium mb-2">
-                                    Tipo de Documento
+                                    {isMobile ? 'T. Documento' : 'Tipo de Documento'}
                                 </label>
                                 <Dropdown 
                                     id="tipoDocumento"
@@ -298,7 +311,7 @@ export default function IncapacidadDetallePage() {
                             </div>
                             <div className="col-12 md:col-3">
                                 <label htmlFor="numeroDocumento" className="block text-900 font-medium mb-2">
-                                    Número de Documento
+                                    {isMobile ? 'N° Documento' : 'Número de Documento'}
                                 </label>
                                 <InputText 
                                     id="numeroDocumento"
@@ -350,6 +363,7 @@ export default function IncapacidadDetallePage() {
                                     currency="COP"
                                     locale="es-CO"
                                     className="w-full"
+                                    inputClassName="w-full"
                                 />
                             </div>
                         </div>
