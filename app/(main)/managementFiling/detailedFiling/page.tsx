@@ -141,7 +141,7 @@ export default function IncapacidadDetallePage() {
                         fechaFinIncapacidad: new Date('2025-06-24'),
                         numeroRadicadoERP: 'ERP-20250615-001',
                         diasIncapacidad: 14,
-                    } /*
+                    },
                     {
                         id: 'INC-20250515-000124',
                         nombresApellidos: 'María Fernanda López Silva',
@@ -153,15 +153,14 @@ export default function IncapacidadDetallePage() {
                         numeroTelefono: '3109876543',
                         fechaInicioIncapacidad: new Date('2025-06-12'),
                         fechaRadicacion: new Date('2025-06-16'),
-                        estado: 'Pagado',
+                        estado: 'En trámite',
                         observaciones: 'Cirugía de apendicitis programada, requiere reposo de 15 días',
                         salarioEmpleado: 3200000,
                         tieneHistoriaClinica: true,
                         tieneDocumentosAdicionales: true,
                         tipoIncapacidad: 'licencia-paternidad',
-                        fechaNacimientoHijo: new Date('2025-06-01'),
-                        nombreHijo: 'Santiago López',
-                        certificadoNacimiento: true
+                        fechaFinIncapacidad: new Date('2025-06-27'),
+                        numeroRadicadoERP: 'ERP-20250616-002',
                     },
                     {
                         id: 'INC-20250515-000125',
@@ -180,11 +179,9 @@ export default function IncapacidadDetallePage() {
                         tieneHistoriaClinica: false,
                         tieneDocumentosAdicionales: false,
                         tipoIncapacidad: 'accidente-trabajo',
-                        fechaAccidente: new Date('2025-06-07'),
-                        lugarAccidente: 'Planta de producción - Línea 2',
-                        descripcionAccidente: 'Levantamiento de carga pesada sin equipo de protección',
-                        testigos: 'Pedro Ramírez, Ana Gutiérrez',
-                        reporteAccidente: true
+                        fechaFinIncapacidad: new Date('2025-06-22'),
+                        numeroRadicadoERP: 'ERP-20250614-003',
+                        diasIncapacidad: 14,
                     },
                     {
                         id: 'INC-20250515-000126',
@@ -203,11 +200,10 @@ export default function IncapacidadDetallePage() {
                         tieneHistoriaClinica: false,
                         tieneDocumentosAdicionales: false,
                         tipoIncapacidad: 'enfermedad-general',
-                        diagnosticoMedico: 'Gastritis crónica',
-                        medicoTratante: 'Dra. Patricia Ruiz',
-                        numeroRegistroMedico: '87654321',
-                        fechaExpedicionIncapacidad: new Date('2025-06-11')
-                    }*/
+                        fechaFinIncapacidad: new Date('2025-06-25'),
+                        numeroRadicadoERP: 'ERP-20250617-004',
+                        diasIncapacidad: 14,
+                    }
                 ];
 
                 const incapacidadEncontrada = datosEjemplo.find((inc) => inc.id === incapacidadId);
