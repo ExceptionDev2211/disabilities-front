@@ -52,15 +52,15 @@ const Filing = () => {
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Correo electrónico:  </label>
+                            <label htmlFor="lastname2">Correo electrónico (obligatorio):  </label>
                             <InputText id="lastname2" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Fecha de inicio de la incapacidad:  </label>
+                            <label htmlFor="lastname2">Fecha de inicio de la incapacidad (obligatorio):  </label>
                             <Calendar showIcon id="lastname2" />
                         </div>
                         <div className="field col-12">
-                            <label>Adjuntar incapacidad: </label>
+                            <label>Adjuntar incapacidad (obligatorio): </label>
                             <FileUpload
                                 name="soporte"
                                 auto
@@ -79,7 +79,7 @@ const Filing = () => {
                         {showExtraInfo && (
                             <>
                                 <div className="field col-12">
-                                    <label>Historia clínica</label>
+                                    <label>Historia clínica (opcional):</label>
                                     <FileUpload
                                         name="soporte"
                                         url={'/api/upload'}
@@ -90,7 +90,7 @@ const Filing = () => {
                                     />
                                 </div>
                                 <div className="field col-12">
-                                    <label>Otros: </label>
+                                    <label>Otros (opcional): </label>
                                     <FileUpload
                                         name="soporte"
                                         url={'/api/upload'}
@@ -103,7 +103,7 @@ const Filing = () => {
                                 </div>
 
                                 <div className="field col-12">
-                                    <label htmlFor="address">Observaciones: </label>
+                                    <label htmlFor="address">Observaciones (opcional): </label>
                                     <InputTextarea id="address" rows={4} autoResize />
 
                                 </div>
