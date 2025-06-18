@@ -134,6 +134,7 @@ const LoginPage = () => {
                                         options={tiposDocumento}
                                         placeholder="Seleccione tipo de documento"
                                         className="w-full md:w-30rem mb-5"
+                                        style={{ padding: '0.75rem' }}
                                     />
                                     
                                     <label htmlFor="numeroTarjeta" className="block text-900 text-xl font-medium mb-2">
@@ -156,8 +157,8 @@ const LoginPage = () => {
                                         value={fechaNacimiento}
                                         onChange={(e) => setFechaNacimiento(e.value || null)}
                                         placeholder="Seleccione su fecha de nacimiento"
-                                        className="w-full mb-5"
-                                        inputClassName="w-full p-3 md:w-30rem"
+                                        className="w-full md:w-30rem mb-5"
+                                        inputClassName="w-full p-3"
                                         dateFormat="dd/mm/yy"
                                         showIcon
                                         maxDate={new Date()}
