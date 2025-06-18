@@ -28,7 +28,7 @@ interface Incapacidad {
     numeroTelefono?: string;
     fechaInicioIncapacidad: Date;
     fechaRadicacion: Date;
-    estado: 'Pendiente' | 'En Revisión' | 'Pagado' | 'No Pagado';
+    estado: 'En proceso de pago' | 'Revisión AlfaPlus' | 'Pagada' | 'Devolución' | 'En trámite' | 'No cobrable 1/2' | 'Pendiente' | 'No Pagado' | 'Gestionada' | 'Negada en gestión' | 'Negada no recuperable';
     observaciones?: string;
     salarioEmpleado: number;
     tieneHistoriaClinica: boolean;
@@ -39,12 +39,11 @@ interface Incapacidad {
     numeroRadicadoERP: string;
     // Campos específicos para licencia de paternidad
 
-    // Campos específicos para enfermedad general
+    // Campos específicos para enfermedad general y accidente de trabajo
     codigoDiagnostico?: string;
     nombreDiagnostico?: string;
     diasAcumulados?: number;
     entidadPrestadora?: 'EPS' | 'ARL' | 'AFP';
-    // Campos específicos para accidente de trabajo
 }
 
 export default function IncapacidadDetallePage() {
@@ -133,7 +132,7 @@ export default function IncapacidadDetallePage() {
                         numeroTelefono: '3001234567',
                         fechaInicioIncapacidad: new Date('2025-06-10'),
                         fechaRadicacion: new Date('2025-06-15'),
-                        estado: 'En Revisión',
+                        estado: 'Pagada',
                         observaciones: 'Fractura de muñeca izquierda causada por caída en escaleras',
                         salarioEmpleado: 2500000,
                         tieneHistoriaClinica: true,

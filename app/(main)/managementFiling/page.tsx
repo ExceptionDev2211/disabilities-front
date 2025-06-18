@@ -20,7 +20,7 @@ interface Incapacidad {
     numeroTelefono?: string;
     fechaInicioIncapacidad: Date;
     fechaRadicacion: Date;
-    estado: 'Pendiente' | 'En Revisión' | 'Pagado' | 'No Pagado';
+    estado: 'En proceso de pago' | 'Revisión AlfaPlus' | 'Pagada' | 'Devolución' | 'En trámite' | 'No cobrable 1/2' | 'Pendiente' | 'No Pagado' | 'Gestionada' | 'Negada en gestión' | 'Negada no recuperable';
     observaciones?: string;
     salarioEmpleado: number;
     tieneHistoriaClinica: boolean;
@@ -64,7 +64,7 @@ const ManagementFiling = () => {
                 numeroTelefono: '3001234567',
                 fechaInicioIncapacidad: new Date('2025-06-10'),
                 fechaRadicacion: new Date('2025-06-15'),
-                estado: 'En Revisión',
+                estado: 'Pagada',
                 observaciones: 'Fractura de muñeca izquierda causada por caída en escaleras',
                 salarioEmpleado: 2500000,
                 tieneHistoriaClinica: true,
@@ -81,7 +81,7 @@ const ManagementFiling = () => {
                 numeroTelefono: '3109876543',
                 fechaInicioIncapacidad: new Date('2025-06-12'),
                 fechaRadicacion: new Date('2025-06-16'),
-                estado: 'Pagado',
+                estado: 'Revisión AlfaPlus',
                 observaciones: 'Cirugía de apendicitis programada, requiere reposo de 15 días',
                 salarioEmpleado: 3200000,
                 tieneHistoriaClinica: true,
@@ -98,7 +98,7 @@ const ManagementFiling = () => {
                 numeroTelefono: '3155551234',
                 fechaInicioIncapacidad: new Date('2025-06-08'),
                 fechaRadicacion: new Date('2025-06-14'),
-                estado: 'Pendiente',
+                estado: 'En proceso de pago',
                 observaciones: 'Lesión en espalda baja, pendiente evaluación médica especializada',
                 salarioEmpleado: 1800000,
                 tieneHistoriaClinica: false,
@@ -115,7 +115,7 @@ const ManagementFiling = () => {
                 numeroTelefono: '3007778899',
                 fechaInicioIncapacidad: new Date('2025-06-11'),
                 fechaRadicacion: new Date('2025-06-17'),
-                estado: 'No Pagado',
+                estado: 'Devolución',
                 observaciones: 'Documentación incompleta - falta certificado médico y exámenes de laboratorio',
                 salarioEmpleado: 2800000,
                 tieneHistoriaClinica: false,
