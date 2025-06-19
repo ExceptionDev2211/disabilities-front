@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
+import ManualPayrollForm from './components/ManualPayrollForm';
 const estadoOptions = [
   { label: 'Todos', value: null },
   { label: 'Activo', value: 'Activo' },
@@ -26,6 +27,7 @@ const Payrolls = () => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [selectedEmpleado, setSelectedEmployee] = useState<Empleado | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [manualUploadModal, setManualUploadModal] = useState(false);
   const toast = useRef<Toast>(null);
   const router = useRouter();
   const [filters, setFilters] = useState({
@@ -113,6 +115,12 @@ const Payrolls = () => {
         className="p-button-primary p-button-sm"
         onClick={() => setModalVisible(true)}
       />
+      <Button
+        label="Cargue manual"
+        icon="pi pi-upload"
+        className="p-button-primary p-button-sm"
+        onClick={() => setManualUploadModal(true)}
+      />
     </div>
   );
 
@@ -138,7 +146,7 @@ const Payrolls = () => {
   return (
     <div className="col-12">
       <div className="card">
-        <h2 className="text-900 font-semibold text-xl mb-2">Consulta de Nómina</h2>
+        <h2 className="text-900 font-semibold text-xl mb-2">Consulta y cargue de Nómina</h2>
 
         <DataTable
           value={data}
@@ -178,7 +186,7 @@ const Payrolls = () => {
         <Dialog
           header="Cargar Nómina"
           visible={modalVisible}
-          style={{ width: '30vw' }}
+          style={{ width: '50vw' }}
           onHide={() => setModalVisible(false)}
           modal
         >
@@ -186,7 +194,7 @@ const Payrolls = () => {
             name="nomina[]"
             customUpload
             multiple
-            chooseLabel="Seleccionar Archivos"
+            chooseLabel="Seleccionar"
             uploadLabel="Subir"
             cancelLabel="Cancelar"
             accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
@@ -203,7 +211,10 @@ const Payrolls = () => {
             emptyTemplate={<p className="m-0">Arrastre y suelte los archivos aquí o haga clic para seleccionar.</p>}
           />
         </Dialog>
-
+         <ManualPayrollForm 
+        visible={manualUploadModal}
+        onHide={() => setManualUploadModal(false)}
+      />
       </div>
     </div>
   );

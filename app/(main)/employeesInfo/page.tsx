@@ -320,10 +320,10 @@ const EmployeesInfo = () => {
           tooltip="Editar"
         />
         <Button
-          icon="pi pi-trash"
+          icon="pi pi-ban"
           className="p-button-rounded p-button-danger p-button-text"
           onClick={() => deleteEmployee(rowData)}
-          tooltip="Eliminar"
+          tooltip="Inactivar"
         />
       </div>
     )
@@ -379,7 +379,8 @@ const EmployeesInfo = () => {
 
               <DataTable 
                 value={employees} 
-                paginator 
+                paginator
+                showGridlines 
                 rows={10} 
                 className="mt-4"
                 emptyMessage="No se encontraron analistas"

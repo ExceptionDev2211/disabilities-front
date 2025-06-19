@@ -11,7 +11,7 @@ import React, { useRef, useState } from 'react'
 
 const Filing = () => {
     const [displayBasic, setDisplayBasic] = useState(false);
-    const [showExtraInfo, setShowExtraInfo] = useState(false);
+    
 
     const toast = useRef<Toast>(null);
     const sendFiling = () => {
@@ -70,14 +70,8 @@ const Filing = () => {
                                 emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>}
                             />
                         </div>
-                        <div className="field col-12">
-                            <div className="flex align-items-center">
-                                <Checkbox inputId="extraInfo" onChange={e => setShowExtraInfo(e.checked!)} checked={showExtraInfo} />
-                                <label htmlFor="extraInfo" className="ml-2">¿Desea incluir más información?</label>
-                            </div>
-                        </div>
-                        {showExtraInfo && (
-                            <>
+                        
+                       
                                 <div className="field col-12">
                                     <label>Historia clínica (opcional):</label>
                                     <FileUpload
@@ -107,8 +101,7 @@ const Filing = () => {
                                     <InputTextarea id="address" rows={4} autoResize />
 
                                 </div>
-                            </>
-                        )}
+                          
                         <div className=" flex justify-content-end ">
                             <Button type='button' onClick={() => setDisplayBasic(true)} className='ml-2' label="Radicar Incapacidad" icon="pi pi-check" />
                         </div>

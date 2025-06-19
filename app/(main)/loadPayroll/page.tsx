@@ -65,7 +65,7 @@ const LoadPayroll = () => {
                   </Dropdown>
                 </div>
                 <div className="field col-12 md:col-6">
-                  <label htmlFor="firstname2">Correo de notificación:</label>
+                  <label htmlFor="firstname2" className=''>Correo de notificación:</label>
                   <InputText id="firstname2" type="text" />
                 </div>
                 <div className="field col-12 md:col-6">
