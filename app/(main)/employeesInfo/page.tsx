@@ -49,7 +49,7 @@ const EmployeesInfo = () => {
   
   const toast = useRef<Toast>(null)
   
-  // Base de datos simulada de empleados existentes
+  
   const [employeesDatabase] = useState([
     {
       numeroIdentificacion: '12345678',
@@ -84,6 +84,7 @@ const EmployeesInfo = () => {
       incapacidadesProcesadas: 45,
       promedioTiempo: 2.3,
       eficiencia: 92
+      
     },
     {
       id: 2,
@@ -320,10 +321,10 @@ const EmployeesInfo = () => {
           tooltip="Editar"
         />
         <Button
-          icon="pi pi-trash"
+          icon="pi pi-ban"
           className="p-button-rounded p-button-danger p-button-text"
           onClick={() => deleteEmployee(rowData)}
-          tooltip="Eliminar"
+          tooltip="Inactivar"
         />
       </div>
     )
@@ -379,7 +380,8 @@ const EmployeesInfo = () => {
 
               <DataTable 
                 value={employees} 
-                paginator 
+                paginator
+                showGridlines 
                 rows={10} 
                 className="mt-4"
                 emptyMessage="No se encontraron analistas"
@@ -387,8 +389,8 @@ const EmployeesInfo = () => {
                 <Column field="numeroIdentificacion" header="N° Identificación" sortable />
                 <Column field="nombre" header="Analista" sortable />
                 <Column field="email" header="Email" sortable />
-                <Column field="fechaInicio" header="Fecha Inicio" body={(rowData) => dateTemplate(rowData, 'fechaInicio')} sortable />
-                <Column field="fechaFin" header="Fecha Fin" body={(rowData) => dateTemplate(rowData, 'fechaFin')} sortable />                
+                <Column field="fechaInicio" header="Fecha inicio de asignación" body={(rowData) => dateTemplate(rowData, 'fechaInicio')} sortable />
+                <Column field="fechaFin" header="Fecha fin de asignación" body={(rowData) => dateTemplate(rowData, 'fechaFin')} sortable />                
                 <Column field="empresas" header="Empresas Asignadas" body={companiesTemplate} />
                 <Column header="Acciones" body={actionsTemplate} style={{ width: '120px' }} />
               </DataTable>
@@ -403,8 +405,8 @@ const EmployeesInfo = () => {
               <p className="text-gray-600 mb-4">Monitorea el rendimiento y actividad de los analistas</p>
               <div className="grid">
                 {employees.map((employee) => (
-                  <div key={employee.id} className="col-12 md:col-6 lg:col-4">
-                    <Card className="mb-3">
+                  <div key={employee.id} className="col-12 md:col-6 lg:col-6">
+                    <Card className="mb-2">
                       <div className="flex flex-column gap-3">
                         <div className="flex justify-content-between align-items-start">
                           <div>
@@ -413,11 +415,11 @@ const EmployeesInfo = () => {
                           </div>
                         </div>
                         
-                        <Divider className="my-2" />
+                        <Divider className="my-2 " />
                         
                         <div className="flex flex-column gap-2">
                           <div className="flex justify-content-between">
-                            <span className="text-600">Período:</span>
+                            <span className="text-600">Período de asignación:</span>
                             <span className="font-semibold text-sm">
                               {employee.fechaInicio.toLocaleDateString('es-CO')} - {employee.fechaFin.toLocaleDateString('es-CO')}
                             </span>
@@ -432,7 +434,7 @@ const EmployeesInfo = () => {
                           </div> */}
                           <div className="flex justify-content-between align-items-center">
                             
-                           {/*  <span className="text-600">Eficiencia:</span>
+                            <span className="text-600">Eficiencia:</span>
                             <div className="flex align-items-center gap-2">
                               <ProgressBar 
                                 value={employee.eficiencia} 
@@ -441,19 +443,17 @@ const EmployeesInfo = () => {
                                        employee.eficiencia >= 80 ? '#f59e0b' : '#ef4444'}
                               />
                               <span className="font-semibold text-sm">{employee.eficiencia}%</span>
-                            </div> */}
+                            </div> 
                           </div>
                         </div>
                         
                         <div className="mt-2">
                           <small className="text-600">Empresas asignadas: {employee.empresas.length}</small>
                           <div className="flex flex-wrap gap-1 mt-1">
-                            {employee.empresas.slice(0, 2).map((empresa, index) => (
-                              <Tag key={index} value={empresa} severity="info" className="text-xs" />
+                            {employee.empresas.map((empresa, index) => (
+                              <Tag key={index} value={empresa} severity="info" />
                             ))}
-                            {employee.empresas.length > 2 && (
-                              <Tag value={`+${employee.empresas.length - 2}`} severity="info" className="text-xs" />
-                            )}
+                            
                           </div>
                         </div>
                       </div>

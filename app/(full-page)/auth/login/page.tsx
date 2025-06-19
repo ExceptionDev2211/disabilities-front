@@ -111,10 +111,10 @@ const LoginPage = () => {
                         <div style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-flex' }}>
                             {!showIncapacidadForm ? (
                                 <div>
-                                    <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
+                                    <label htmlFor="user" className="block text-900 text-xl font-medium mb-2">
                                         Email
                                     </label>
-                                    <InputText id="email1" type="text" placeholder="Ingrese su correo electrónico" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
+                                    <InputText id="user" type="text" placeholder="Usuario" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
                                     <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                                         Contraseña
                                     </label>

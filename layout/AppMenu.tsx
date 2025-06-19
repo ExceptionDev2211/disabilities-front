@@ -27,8 +27,9 @@ const AppMenu = () => {
         },
         {
             label: 'Control operativo',
-            items: [{ label: 'Crear reporte', icon: 'pi pi-chart-bar', to: '/reports' },
-                { label: 'Gestión de personal', icon: 'pi pi-users', to: '/employeesInfo' }
+            items: [
+                { label: 'Gestión de analistas', icon: 'pi pi-users', to: '/employeesInfo' },
+                { label: 'Crear reporte', icon: 'pi pi-chart-bar', to: '/reports' },
                 
             ]
         },
