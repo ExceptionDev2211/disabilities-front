@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -9,8 +9,10 @@ import { Tag } from 'primereact/tag';
 import { Calendar } from 'primereact/calendar';
 import { FilterMatchMode } from 'primereact/api';
 import { dummyData, Historial, Empleado } from './dummyData';
-
-
+import { useRouter } from 'next/navigation';
+import { FileUpload } from 'primereact/fileupload';
+import { Toast } from 'primereact/toast';
+import { Dialog } from 'primereact/dialog';
 const estadoOptions = [
   { label: 'Todos', value: null },
   { label: 'Activo', value: 'Activo' },
@@ -22,8 +24,10 @@ const Payrolls = () => {
   const [filtroNIT, setFiltroNIT] = useState('');
   const [globalFilterValue, setGlobalFilterValue] = useState('');
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
-  const [selectedEmpleado, setSelectedEmployee] = useState<Empleado | null>(null); // NUEVO
-
+  const [selectedEmpleado, setSelectedEmployee] = useState<Empleado | null>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const toast = useRef<Toast>(null);
+  const router = useRouter();
   const [filters, setFilters] = useState({
     global: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
     estado: { value: null as string | null, matchMode: FilterMatchMode.EQUALS }
@@ -103,6 +107,12 @@ const Payrolls = () => {
         className="p-inputtext-sm"
       />
       <Button label="Exportar Excel" icon="pi pi-file-excel" className="p-button-success p-button-sm" />
+      <Button
+        label="Cargar Nómina"
+        icon="pi pi-upload"
+        className="p-button-primary p-button-sm"
+        onClick={() => setModalVisible(true)}
+      />
     </div>
   );
 
@@ -147,13 +157,13 @@ const Payrolls = () => {
           showGridlines
           selectionMode="single"
           onRowSelect={(e) => {
-            const selectedEmployee = dummyData.find((emp) => emp.cedula === e.data.cedula);
-            setSelectedEmployee(selectedEmployee || null);
+            router.push(`/payrolls/employeeHistory?id=${e.data.cedula}`);
+
           }}
         >
           <Column field="nombre" header="Empleado" sortable />
           <Column field="cedula" header="N° documento" sortable />
-          <Column field="estado" header="Estado"  sortable body={estadoBody} />
+          <Column field="estado" header="Estado" sortable body={estadoBody} />
           <Column field="fechaCargue" header="Fecha Cargue" sortable body={(row) => dateTemplate(row, 'fechaCargue')} />
           <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => dateTemplate(row, 'fechaRetiro')} />
           <Column field="centroCosto" header="Centro Costo" sortable />
@@ -163,30 +173,37 @@ const Payrolls = () => {
           <Column field="cargo" header="Cargo" sortable />
           <Column field="nit" header="NIT" sortable />
         </DataTable>
+        <Toast ref={toast} />
 
-        
-        {selectedEmpleado && (
-          <div className="mt-5">
-            <h3 className="text-xl mb-3">Historial de: {selectedEmpleado.nombre}</h3>
-            <DataTable
-              value={selectedEmpleado.historial.sort((a, b) => b.fechaCargue.localeCompare(a.fechaCargue))}
-              className="p-datatable-sm p-datatable-striped"
-              size="small"
-              showGridlines
-              emptyMessage="Sin historial"
-            >
-              <Column field="fechaCargue" header="Fecha Cargue"  />
-              <Column field="fechaRetiro" header="Fecha Retiro" body={(row) => dateTemplate(row, 'fechaRetiro')} />
-              <Column field="estado" header="Estado" body={estadoBody} />
-              <Column field="centroCosto" header="Centro Costo" />
-              <Column field="eps" header="EPS" />
-              <Column field="salario" header="Salario" body={salarioBody} />
-              <Column field="tipoContrato" header="Tipo Contrato" />
-              <Column field="cargo" header="Cargo" />
-              <Column field="nit" header="NIT" />
-            </DataTable>
-          </div>
-        )}
+        <Dialog
+          header="Cargar Nómina"
+          visible={modalVisible}
+          style={{ width: '30vw' }}
+          onHide={() => setModalVisible(false)}
+          modal
+        >
+          <FileUpload
+            name="nomina[]"
+            customUpload
+            multiple
+            chooseLabel="Seleccionar Archivos"
+            uploadLabel="Subir"
+            cancelLabel="Cancelar"
+            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+            maxFileSize={5000000}
+            uploadHandler={(e) => {
+              toast.current?.show({
+                severity: 'success',
+                summary: 'Carga Exitosa',
+                detail: `${e.files.length} archivo(s) cargado(s)`,
+                life: 3000
+              });
+              setModalVisible(false);
+            }}
+            emptyTemplate={<p className="m-0">Arrastre y suelte los archivos aquí o haga clic para seleccionar.</p>}
+          />
+        </Dialog>
+
       </div>
     </div>
   );

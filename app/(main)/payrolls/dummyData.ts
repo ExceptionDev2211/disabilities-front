@@ -3,7 +3,7 @@ export interface Historial {
   estado: 'Activo' | 'Retirado' | 'Licencia';
   fechaCargue: string;
   fechaRetiro?: string | null;
-  centroCosto: string;
+  centroCosto: string; // Modificado para ser alfanumérico
   eps: string;
   salario: number;
   tipoContrato: string;
@@ -26,7 +26,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-03-15',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2800000,
         tipoContrato: 'Indefinido',
@@ -43,7 +43,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-20',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3500000,
         tipoContrato: 'Indefinido',
@@ -54,7 +54,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-07-01',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3200000,
         tipoContrato: 'Indefinido',
@@ -71,7 +71,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-09-01',
         fechaRetiro: '2024-02-28',
-        centroCosto: 'Operaciones',
+        centroCosto: 'CC003', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2900000,
         tipoContrato: 'Fijo',
@@ -88,7 +88,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-10',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4200000,
         tipoContrato: 'Indefinido',
@@ -105,7 +105,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-11-05',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2600000,
         tipoContrato: 'Indefinido',
@@ -122,7 +122,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-01',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2300000,
         tipoContrato: 'Temporal',
@@ -133,7 +133,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2023-01-01',
         fechaRetiro: '2024-01-31',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2200000,
         tipoContrato: 'Fijo',
@@ -150,7 +150,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-20',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3800000,
         tipoContrato: 'Indefinido',
@@ -167,7 +167,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-01',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4500000,
         tipoContrato: 'Indefinido',
@@ -184,7 +184,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-06-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2700000,
         tipoContrato: 'Indefinido',
@@ -201,7 +201,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2021-04-01',
         fechaRetiro: '2023-10-31',
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3900000,
         tipoContrato: 'Indefinido',
@@ -218,7 +218,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-01',
         fechaRetiro: null,
-        centroCosto: 'Diseño',
+        centroCosto: 'CC009', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3100000,
         tipoContrato: 'Fijo',
@@ -235,7 +235,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-08-15',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2500000,
         tipoContrato: 'Indefinido',
@@ -252,7 +252,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-01',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3000000,
         tipoContrato: 'Indefinido',
@@ -269,7 +269,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-04-20',
         fechaRetiro: null,
-        centroCosto: 'Legal',
+        centroCosto: 'CC011', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 5000000,
         tipoContrato: 'Indefinido',
@@ -286,7 +286,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-01-01',
         fechaRetiro: '2024-01-31',
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3300000,
         tipoContrato: 'Indefinido',
@@ -303,7 +303,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-15',
         fechaRetiro: null,
-        centroCosto: 'Contabilidad',
+        centroCosto: 'CC012', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3600000,
         tipoContrato: 'Indefinido',
@@ -320,7 +320,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-07-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2750000,
         tipoContrato: 'Indefinido',
@@ -331,7 +331,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2022-01-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2600000,
         tipoContrato: 'Fijo',
@@ -348,7 +348,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-01',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4800000,
         tipoContrato: 'Indefinido',
@@ -365,7 +365,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-10-10',
         fechaRetiro: null,
-        centroCosto: 'Servicio al Cliente',
+        centroCosto: 'CC013', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2200000,
         tipoContrato: 'Temporal',
@@ -382,7 +382,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-03-01',
         fechaRetiro: '2024-03-15',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2400000,
         tipoContrato: 'Fijo',
@@ -399,7 +399,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-15',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3400000,
         tipoContrato: 'Indefinido',
@@ -416,7 +416,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-02-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2900000,
         tipoContrato: 'Indefinido',
@@ -433,7 +433,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-05',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3700000,
         tipoContrato: 'Indefinido',
@@ -450,7 +450,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-07-01',
         fechaRetiro: '2024-04-30',
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 4000000,
         tipoContrato: 'Indefinido',
@@ -467,7 +467,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-01',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2550000,
         tipoContrato: 'Indefinido',
@@ -484,7 +484,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-10',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2450000,
         tipoContrato: 'Fijo',
@@ -501,7 +501,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-06-15',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3100000,
         tipoContrato: 'Indefinido',
@@ -518,7 +518,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-20',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008A', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4300000,
         tipoContrato: 'Indefinido',
@@ -535,7 +535,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2021-11-01',
         fechaRetiro: '2024-05-31',
-        centroCosto: 'Diseño',
+        centroCosto: 'CC009', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3000000,
         tipoContrato: 'Indefinido',
@@ -552,7 +552,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-05-01',
         fechaRetiro: null,
-        centroCosto: 'Operaciones',
+        centroCosto: 'CC014', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3200000,
         tipoContrato: 'Indefinido',
@@ -569,7 +569,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-15',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2650000,
         tipoContrato: 'Fijo',
@@ -586,7 +586,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-07-25',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3350000,
         tipoContrato: 'Indefinido',
@@ -603,7 +603,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-05',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 5000000,
         tipoContrato: 'Indefinido',
@@ -620,7 +620,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-05-01',
         fechaRetiro: '2024-06-01',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2600000,
         tipoContrato: 'Temporal',
@@ -637,7 +637,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-11-10',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3900000,
         tipoContrato: 'Indefinido',
@@ -654,7 +654,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-20',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4600000,
         tipoContrato: 'Indefinido',
@@ -671,7 +671,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-08-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2850000,
         tipoContrato: 'Indefinido',
@@ -688,7 +688,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-01',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3600000,
         tipoContrato: 'Indefinido',
@@ -705,7 +705,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-09-15',
         fechaRetiro: '2024-02-29',
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2700000,
         tipoContrato: 'Fijo',
@@ -722,7 +722,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-04-10',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4700000,
         tipoContrato: 'Indefinido',
@@ -739,7 +739,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-20',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3050000,
         tipoContrato: 'Indefinido',
@@ -756,7 +756,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-01-01',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2350000,
         tipoContrato: 'Temporal',
@@ -773,7 +773,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-05',
         fechaRetiro: null,
-        centroCosto: 'Legal',
+        centroCosto: 'CC011', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 5200000,
         tipoContrato: 'Indefinido',
@@ -790,7 +790,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-08-01',
         fechaRetiro: '2024-03-31',
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3400000,
         tipoContrato: 'Indefinido',
@@ -807,7 +807,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-25',
         fechaRetiro: null,
-        centroCosto: 'Contabilidad',
+        centroCosto: 'CC012', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3700000,
         tipoContrato: 'Indefinido',
@@ -824,7 +824,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-15',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2950000,
         tipoContrato: 'Indefinido',
@@ -841,7 +841,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-03-01',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4900000,
         tipoContrato: 'Indefinido',
@@ -858,7 +858,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-01',
         fechaRetiro: null,
-        centroCosto: 'Servicio al Cliente',
+        centroCosto: 'CC013', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2300000,
         tipoContrato: 'Temporal',
@@ -875,7 +875,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-04-01',
         fechaRetiro: '2024-05-15',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2500000,
         tipoContrato: 'Fijo',
@@ -892,7 +892,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-10-05',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3500000,
         tipoContrato: 'Indefinido',
@@ -909,7 +909,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-10',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3000000,
         tipoContrato: 'Indefinido',
@@ -926,7 +926,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-05-15',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 4000000,
         tipoContrato: 'Indefinido',
@@ -943,7 +943,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-06-01',
         fechaRetiro: '2024-04-30',
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4100000,
         tipoContrato: 'Indefinido',
@@ -960,7 +960,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-20',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2600000,
         tipoContrato: 'Indefinido',
@@ -977,7 +977,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-07-01',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2500000,
         tipoContrato: 'Fijo',
@@ -994,7 +994,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-10',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3200000,
         tipoContrato: 'Indefinido',
@@ -1011,7 +1011,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-01',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008A', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4400000,
         tipoContrato: 'Indefinido',
@@ -1028,7 +1028,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2021-10-01',
         fechaRetiro: '2024-06-01',
-        centroCosto: 'Operaciones',
+        centroCosto: 'CC014', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3300000,
         tipoContrato: 'Indefinido',
@@ -1045,7 +1045,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2700000,
         tipoContrato: 'Indefinido',
@@ -1062,7 +1062,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-02-15',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3600000,
         tipoContrato: 'Indefinido',
@@ -1079,7 +1079,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-20',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 5100000,
         tipoContrato: 'Indefinido',
@@ -1096,7 +1096,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-03-10',
         fechaRetiro: '2024-02-28',
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3800000,
         tipoContrato: 'Indefinido',
@@ -1113,7 +1113,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-11-20',
         fechaRetiro: null,
-        centroCosto: 'Contabilidad',
+        centroCosto: 'CC012', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3900000,
         tipoContrato: 'Indefinido',
@@ -1130,7 +1130,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-05',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2800000,
         tipoContrato: 'Indefinido',
@@ -1147,7 +1147,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-04-01',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 5000000,
         tipoContrato: 'Indefinido',
@@ -1164,7 +1164,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-10',
         fechaRetiro: null,
-        centroCosto: 'Servicio al Cliente',
+        centroCosto: 'CC013', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2400000,
         tipoContrato: 'Temporal',
@@ -1181,7 +1181,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-07-01',
         fechaRetiro: '2024-03-31',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2600000,
         tipoContrato: 'Fijo',
@@ -1198,7 +1198,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-10-15',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3700000,
         tipoContrato: 'Indefinido',
@@ -1215,7 +1215,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3100000,
         tipoContrato: 'Indefinido',
@@ -1232,7 +1232,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-06-01',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 4100000,
         tipoContrato: 'Indefinido',
@@ -1249,7 +1249,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-08-15',
         fechaRetiro: '2024-04-30',
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4200000,
         tipoContrato: 'Indefinido',
@@ -1266,7 +1266,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-05',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2700000,
         tipoContrato: 'Indefinido',
@@ -1283,7 +1283,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-01-15',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2450000,
         tipoContrato: 'Temporal',
@@ -1300,7 +1300,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-25',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3300000,
         tipoContrato: 'Indefinido',
@@ -1317,7 +1317,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-10',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4500000,
         tipoContrato: 'Indefinido',
@@ -1334,7 +1334,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-02-01',
         fechaRetiro: '2024-01-31',
-        centroCosto: 'Diseño',
+        centroCosto: 'CC009', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3100000,
         tipoContrato: 'Indefinido',
@@ -1351,7 +1351,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-20',
         fechaRetiro: null,
-        centroCosto: 'Operaciones',
+        centroCosto: 'CC014', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3400000,
         tipoContrato: 'Indefinido',
@@ -1368,7 +1368,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-07-05',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2900000,
         tipoContrato: 'Indefinido',
@@ -1385,7 +1385,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-01',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3800000,
         tipoContrato: 'Indefinido',
@@ -1402,9 +1402,9 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-05-15',
         fechaRetiro: '2024-05-31',
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'Sanitas',
-        salario: 4300000,
+        salario: 3900000,
         tipoContrato: 'Indefinido',
         cargo: 'Administrador de Bases de Datos',
         nit: '800123456-1'
@@ -1419,7 +1419,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-11-01',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4200000,
         tipoContrato: 'Indefinido',
@@ -1436,7 +1436,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-15',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2800000,
         tipoContrato: 'Indefinido',
@@ -1453,7 +1453,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-08-20',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2650000,
         tipoContrato: 'Fijo',
@@ -1470,7 +1470,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-09-01',
         fechaRetiro: '2024-02-29',
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3000000,
         tipoContrato: 'Indefinido',
@@ -1487,7 +1487,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-10',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008A', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 4600000,
         tipoContrato: 'Indefinido',
@@ -1504,7 +1504,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-04-05',
         fechaRetiro: null,
-        centroCosto: 'Legal',
+        centroCosto: 'CC011', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 5300000,
         tipoContrato: 'Indefinido',
@@ -1521,7 +1521,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-01',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002A', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3900000,
         tipoContrato: 'Indefinido',
@@ -1538,7 +1538,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-01-01',
         fechaRetiro: '2024-01-31',
-        centroCosto: 'Contabilidad',
+        centroCosto: 'CC012', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 3500000,
         tipoContrato: 'Indefinido',
@@ -1555,7 +1555,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-10-20',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3000000,
         tipoContrato: 'Indefinido',
@@ -1572,7 +1572,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-02-15',
         fechaRetiro: null,
-        centroCosto: 'IT',
+        centroCosto: 'CC004B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 5200000,
         tipoContrato: 'Indefinido',
@@ -1589,7 +1589,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-06-10',
         fechaRetiro: null,
-        centroCosto: 'Servicio al Cliente',
+        centroCosto: 'CC013', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 2500000,
         tipoContrato: 'Temporal',
@@ -1606,7 +1606,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-03-01',
         fechaRetiro: '2024-04-15',
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 2700000,
         tipoContrato: 'Fijo',
@@ -1623,7 +1623,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-05-05',
         fechaRetiro: null,
-        centroCosto: 'Marketing',
+        centroCosto: 'CC002B', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 3600000,
         tipoContrato: 'Indefinido',
@@ -1640,7 +1640,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-02-01',
         fechaRetiro: null,
-        centroCosto: 'Ventas',
+        centroCosto: 'CC001', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 3200000,
         tipoContrato: 'Indefinido',
@@ -1657,7 +1657,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-01-25',
         fechaRetiro: null,
-        centroCosto: 'Recursos Humanos',
+        centroCosto: 'CC007', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 4000000,
         tipoContrato: 'Indefinido',
@@ -1674,7 +1674,7 @@ export const dummyData: Empleado[] = [
         estado: 'Retirado',
         fechaCargue: '2022-07-15',
         fechaRetiro: '2024-04-30',
-        centroCosto: 'IT',
+        centroCosto: 'CC004A', // Centro de costo alfanumérico
         eps: 'Sanitas',
         salario: 4500000,
         tipoContrato: 'Indefinido',
@@ -1691,7 +1691,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-09-01',
         fechaRetiro: null,
-        centroCosto: 'Administración',
+        centroCosto: 'CC005', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 2900000,
         tipoContrato: 'Indefinido',
@@ -1708,7 +1708,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-03-15',
         fechaRetiro: null,
-        centroCosto: 'Producción',
+        centroCosto: 'CC006', // Centro de costo alfanumérico
         eps: 'Nueva EPS',
         salario: 2550000,
         tipoContrato: 'Fijo',
@@ -1725,7 +1725,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2023-06-15',
         fechaRetiro: null,
-        centroCosto: 'Comercial',
+        centroCosto: 'CC010', // Centro de costo alfanumérico
         eps: 'Compensar',
         salario: 3400000,
         tipoContrato: 'Indefinido',
@@ -1742,7 +1742,7 @@ export const dummyData: Empleado[] = [
         estado: 'Activo',
         fechaCargue: '2024-04-01',
         fechaRetiro: null,
-        centroCosto: 'Finanzas',
+        centroCosto: 'CC008A', // Centro de costo alfanumérico
         eps: 'SURA',
         salario: 4700000,
         tipoContrato: 'Indefinido',
