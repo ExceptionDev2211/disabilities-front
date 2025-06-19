@@ -8,6 +8,7 @@ import { Tag } from 'primereact/tag';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { FilterMatchMode } from 'primereact/api';
+import { FileUpload } from 'primereact/fileupload';
 
 interface Incapacidad {
     id: string;
@@ -298,6 +299,10 @@ const ManagementFiling = () => {
                     <Column field="fechaInicioIncapacidad" header="Inicio Incap." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaInicioIncapacidad')} style={{ minWidth: '130px' }} headerStyle={{ width: '130px' }} />
                     <Column header="Documentos" body={documentosBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                 </DataTable>
+                <div className="field col-12">
+                    <label>Ingresar radicaciones por cargue masivo:  </label>
+                    <FileUpload name="soporte" auto url={'/api/upload'} accept="image/*,application/pdf" maxFileSize={1000000} emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>} />
+                </div>
             </div>
         </div>
     );

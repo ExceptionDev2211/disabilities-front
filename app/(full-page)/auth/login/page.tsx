@@ -105,7 +105,7 @@ const LoginPage = () => {
                     >
                         <div className="text-center mb-5">
                             {!showIncapacidadForm && <div className="text-800 text-3xl font-medium mb-3">¡Bienvenido!</div>}
-                            <div className="text-800 text-3xl font-medium mb-3">{showIncapacidadForm ? 'Radicar Incapacidad' : 'Al sistema de gestión de incapacidades'}</div>
+                            <div className="text-800 text-xl font-medium mb-3">{showIncapacidadForm ? 'Radicar Incapacidad' : 'Al sistema de gestión de incapacidades'}</div>
                             <span className="text-600 font-medium">{showIncapacidadForm ? 'Complete los siguientes datos' : 'Inicia sesión para continuar'}</span>
                         </div>
                         <div style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'space-flex' }}>
