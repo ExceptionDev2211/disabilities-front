@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -9,6 +9,8 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { FilterMatchMode } from 'primereact/api';
 import { FileUpload } from 'primereact/fileupload';
+import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
 
 interface Incapacidad {
     id: string;
@@ -39,6 +41,8 @@ const ManagementFiling = () => {
         epsAfiliada: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS }
     });
     const [globalFilterValue, setGlobalFilterValue] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+    const toast = useRef<Toast>(null);
 
     const estadosOptions = [
         { label: 'En trámite', value: 'En trámite' },
@@ -162,6 +166,9 @@ const ManagementFiling = () => {
                         <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Buscar en todos los campos..." className="p-inputtext-sm" />
                     </span>
                 </div>
+                <div>
+                    <Button label="Cargar Radicado" icon="pi pi-upload" className="p-button-primary p-button-sm" onClick={() => setModalVisible(true)} />
+                </div>
             </div>
         );
     };
@@ -263,6 +270,28 @@ const ManagementFiling = () => {
 
     return (
         <div className="col-12">
+            <Dialog header="Cargar Radicado" visible={modalVisible} style={{ width: '50vw' }} onHide={() => setModalVisible(false)} modal>
+                <FileUpload
+                    name="radicado[]"
+                    customUpload
+                    multiple
+                    chooseLabel="Seleccionar"
+                    uploadLabel="Subir"
+                    cancelLabel="Cancelar"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                    maxFileSize={5000000}
+                    uploadHandler={(e) => {
+                        toast.current?.show({
+                            severity: 'success',
+                            summary: 'Carga Exitosa',
+                            detail: `${e.files.length} archivo(s) cargado(s)`,
+                            life: 3000
+                        });
+                        setModalVisible(false);
+                    }}
+                    emptyTemplate={<p className="m-0">Arrastre y suelte los archivos aquí o haga clic para seleccionar.</p>}
+                />
+            </Dialog>
             <div className="card">
                 <h2 className="text-900 font-semibold text-xl mb-3">Gestión de Incapacidades</h2>
                 <DataTable
@@ -299,10 +328,6 @@ const ManagementFiling = () => {
                     <Column field="fechaInicioIncapacidad" header="Inicio Incap." sortable body={(rowData) => fechaBodyTemplate(rowData, 'fechaInicioIncapacidad')} style={{ minWidth: '130px' }} headerStyle={{ width: '130px' }} />
                     <Column header="Documentos" body={documentosBodyTemplate} style={{ minWidth: '140px' }} headerStyle={{ width: '140px' }} />
                 </DataTable>
-                <div className="field col-12">
-                    <label>Ingresar radicaciones por cargue masivo:  </label>
-                    <FileUpload name="soporte" auto url={'/api/upload'} accept="image/*,application/pdf" maxFileSize={1000000} emptyTemplate={<p className="m-0">Arrastre y suelte el archivo aquí o haga clic para seleccionar.</p>} />
-                </div>
             </div>
         </div>
     );
