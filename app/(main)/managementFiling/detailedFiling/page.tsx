@@ -58,6 +58,9 @@ interface Incapacidad {
     totalDiasAOtorgarHabiles?: number;
     diasProporcionales?: number;
     valorLicencia?: number;
+    fechaAccidente?: Date;
+    calificacionARL?: 'No calificado' | 'Calificado';
+    codigoARL?: string;
 }
 
 const getSeverity = (estado: string): 'success' | 'info' | 'warning' | 'danger' | null | undefined => {
@@ -860,12 +863,59 @@ export default function IncapacidadDetallePage() {
                             </>
                         )}
 
-                        {(formData.tipoIncapacidad === 'enfermedad-general' || formData.tipoIncapacidad === 'accidente-trabajo') && (
+                        {formData.tipoIncapacidad === 'enfermedad-general' && (
                             <>
                                 <Divider />
-                                <h6 className="text-900 font-semibold mb-3">{formData.tipoIncapacidad === 'enfermedad-general' ? 'Información Médica' : 'Información del Accidente'}</h6>
+                                <h6 className="text-900 font-semibold mb-3">Información Médica</h6>
                                 <div className="grid">
                                     <MedicalFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
+                                </div>
+                            </>
+                        )}
+
+                        {formData.tipoIncapacidad === 'accidente-trabajo' && (
+                            <>
+                                <Divider />
+                                <h6 className="text-900 font-semibold mb-3">Información Médica</h6>
+                                <div className="grid">
+                                    <div className="grid">
+                                        <MedicalFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="fechaAccidente" className="block text-900 font-medium mb-2">
+                                            Fecha de accidente
+                                        </label>
+                                        <Calendar
+                                            id="fechaAccidente"
+                                            value={formData.fechaAccidente}
+                                            onChange={(e) => handleInputChange('fechaAccidente', e.value)}
+                                            disabled={!isEditing}
+                                            dateFormat="dd/mm/yy"
+                                            className="w-full"
+                                            showIcon
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                            <label className="block text-900 font-medium mb-2">Calificacion ARL</label>
+                                            <SelectButton
+                                                value={formData.calificacionARL}
+                                                options={[
+                                                    { label: 'Sí Calificado', value: 'Calificado' },
+                                                    { label: 'No Calificado', value: 'No calificado' }
+                                                ]}
+                                                className="w-full"
+                                            />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label className="block text-900 font-medium mb-2">Calificación ARL</label>
+                                        <InputText
+                                            id="calificacionARL"
+                                            value={formData.calificacionARL}
+                                            onChange={(e) => handleInputChange('calificacionARL', e.target.value)}
+                                            disabled={!isEditing}
+                                            className="w-full"
+                                        />
+                                    </div>
                                 </div>
                             </>
                         )}
