@@ -44,6 +44,7 @@ interface Incapacidad {
     nombreDiagnostico?: string;
     diasAcumulados?: number;
     entidadPrestadora?: 'EPS' | 'ARL' | 'AFP';
+    valorPagadoPorEmpresa: number;
 }
 
 export default function IncapacidadDetallePage() {
@@ -141,6 +142,8 @@ export default function IncapacidadDetallePage() {
                         fechaFinIncapacidad: new Date('2025-06-24'),
                         numeroRadicadoERP: 'ERP-20250615-001',
                         diasIncapacidad: 14,
+                        valorPagadoPorEmpresa: 1500000,
+                        codigoDiagnostico: 'S52.5',
                     },
                     {
                         id: 'INC-20250515-000124',
@@ -161,6 +164,9 @@ export default function IncapacidadDetallePage() {
                         tipoIncapacidad: 'licencia-paternidad',
                         fechaFinIncapacidad: new Date('2025-06-27'),
                         numeroRadicadoERP: 'ERP-20250616-002',
+                        diasIncapacidad: 15,
+                        valorPagadoPorEmpresa: 200000,
+                        codigoDiagnostico: 'K35.2',
                     },
                     {
                         id: 'INC-20250515-000125',
@@ -182,6 +188,11 @@ export default function IncapacidadDetallePage() {
                         fechaFinIncapacidad: new Date('2025-06-22'),
                         numeroRadicadoERP: 'ERP-20250614-003',
                         diasIncapacidad: 14,
+                        valorPagadoPorEmpresa: 120000,
+                        codigoDiagnostico: 'M54.5',
+                        nombreDiagnostico: 'Lumbalgia',
+                        diasAcumulados: 5,
+                        entidadPrestadora: 'EPS',
                     },
                     {
                         id: 'INC-20250515-000126',
@@ -203,6 +214,9 @@ export default function IncapacidadDetallePage() {
                         fechaFinIncapacidad: new Date('2025-06-25'),
                         numeroRadicadoERP: 'ERP-20250617-004',
                         diasIncapacidad: 14,
+                        valorPagadoPorEmpresa: 0,
+                        codigoDiagnostico: 'J20.9',
+                        nombreDiagnostico: 'Bronquitis aguda',
                     }
                 ];
 
