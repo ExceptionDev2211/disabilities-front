@@ -43,20 +43,45 @@ interface Incapacidad {
     entidadPrestadora?: 'EPS' | 'ARL' | 'AFP';
     valorPagadoPorEmpresa: number;
     valorEsperadoRecaudo?: number;
+    fechaPagoIncapacidadTrabajador?: Date;
+    valorPagadoPorEPS?: number;
+    fechaPagoIncapacidadEPS?: Date;
+    tipoGestion?: '1' | '2' | '3';
+    fechaGestion?: Date;
+    causalRechazo?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+    semanaTermino?: 37 | 38 | 39 | 40;
+    edadGestacional?: 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36;
+    diasCotizados?: number;
+    diasGestacion?: number;
+    factor?: number;
+    totalDiasAOtorgarCalendario?: number;
+    totalDiasAOtorgarHabiles?: number;
+    diasProporcionales?: number;
+    valorLicencia?: number;
 }
 
 const getSeverity = (estado: string): 'success' | 'info' | 'warning' | 'danger' | null | undefined => {
     switch (estado) {
-        case 'Pagada': return 'success';
-        case 'En proceso de pago': return 'info';
-        case 'Revisión AlfaPlus': return 'info';
-        case 'En trámite': return 'info';
-        case 'Devolución': return 'warning';
-        case 'Negada en gestión': return 'warning';
-        case 'Negada no recuperable': return 'danger';
-        case 'Gestionada': return 'info';
-        case 'No cobrable 1/2': return 'warning';
-        default: return null;
+        case 'Pagada':
+            return 'success';
+        case 'En proceso de pago':
+            return 'info';
+        case 'Revisión AlfaPlus':
+            return 'info';
+        case 'En trámite':
+            return 'info';
+        case 'Devolución':
+            return 'warning';
+        case 'Negada en gestión':
+            return 'warning';
+        case 'Negada no recuperable':
+            return 'danger';
+        case 'Gestionada':
+            return 'info';
+        case 'No cobrable 1/2':
+            return 'warning';
+        default:
+            return null;
     }
 };
 
@@ -72,45 +97,23 @@ const CommonIncapacityFields = ({ formData, isEditing, handleInputChange }: Comm
             <label htmlFor="diasIncapacidad" className="block text-900 font-medium mb-2">
                 Días de Incapacidad
             </label>
-            <InputNumber
-                id="diasIncapacidad"
-                value={formData.diasIncapacidad || 0}
-                onValueChange={(e) => handleInputChange('diasIncapacidad', e.value)}
-                disabled={!isEditing}
-                className="w-full"
-                placeholder="Cantidad de días"
-                min={0}
-            />
+            <InputNumber id="diasIncapacidad" value={formData.diasIncapacidad || 0} onValueChange={(e) => handleInputChange('diasIncapacidad', e.value)} disabled={!isEditing} className="w-full" placeholder="Cantidad de días" min={0} />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="fechaFinIncapacidad" className="block text-900 font-medium mb-2">
                 Fecha de finalización
             </label>
-            <Calendar
-                id="fechaFinIncapacidad"
-                value={formData.fechaFinIncapacidad}
-                onChange={(e) => handleInputChange('fechaFinIncapacidad', e.value)}
-                disabled={!isEditing}
-                dateFormat="dd/mm/yy"
-                className="w-full"
-                showIcon
-            />
+            <Calendar id="fechaFinIncapacidad" value={formData.fechaFinIncapacidad} onChange={(e) => handleInputChange('fechaFinIncapacidad', e.value)} disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="numeroRadicadoERP" className="block text-900 font-medium mb-2">
                 N° Radicado ERP
             </label>
-            <InputText
-                id="numeroRadicadoERP"
-                value={formData.numeroRadicadoERP}
-                onChange={(e) => handleInputChange('numeroRadicadoERP', e.target.value)}
-                disabled={!isEditing}
-                className="w-full"
-            />
+            <InputText id="numeroRadicadoERP" value={formData.numeroRadicadoERP} onChange={(e) => handleInputChange('numeroRadicadoERP', e.target.value)} disabled={!isEditing} className="w-full" />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="valorPagadoPorEmpresa" className="block text-900 font-medium mb-2">
-                Valor Pagado
+                Valor Pagado por la Empresa
             </label>
             <InputNumber
                 id="valorPagadoPorEmpresa"
@@ -124,6 +127,81 @@ const CommonIncapacityFields = ({ formData, isEditing, handleInputChange }: Comm
                 minFractionDigits={0}
                 maxFractionDigits={0}
             />
+        </div>
+        <div className="col-12 md:col-6">
+            <label htmlFor="valorPagadoPorEPS" className="block text-900 font-medium mb-2">
+                Valor Pagado por la EPS
+            </label>
+            <InputNumber
+                id="valorPagadoPorEPS"
+                value={formData.valorPagadoPorEPS}
+                onValueChange={(e) => handleInputChange('valorPagadoPorEPS', e.value)}
+                disabled={!isEditing}
+                mode="currency"
+                currency="COP"
+                locale="es-CO"
+                className="w-full"
+                minFractionDigits={0}
+                maxFractionDigits={0}
+            />
+        </div>
+        <div className="col-12 md:col-6">
+            <label htmlFor="fechaPagoIncapacidadEPS" className="block text-900 font-medium mb-2">
+                Fecha de pago de la EPS
+            </label>
+            <Calendar id="fechaPagoIncapacidadEPS" value={formData.fechaPagoIncapacidadEPS} onChange={(e) => handleInputChange('fechaPagoIncapacidadEPS', e.value)} disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
+        </div>
+        <div className="col-12 md:col-6">
+            <label htmlFor="tipoGestion" className="block text-900 font-medium mb-2">
+                Tipo de Gestión
+            </label>
+            <Dropdown
+                id="tipoGestion"
+                value={formData.tipoGestion}
+                options={[
+                    { label: '1 - Radicación inicial', value: '1' },
+                    { label: '2 - Revisión y seguimiento', value: '2' },
+                    { label: '3 - Reconsideración o recurso', value: '3' }
+                ]}
+                onChange={(e) => handleInputChange('tipoGestion', e.value)}
+                disabled={!isEditing}
+                className="w-full"
+            />
+        </div>
+        <div className="col-12 md:col-6">
+            <label htmlFor="fechaGestion" className="block text-900 font-medium mb-2">
+                Fecha de gestión
+            </label>
+            <Calendar id="fechaGestion" value={formData.fechaGestion} onChange={(e) => handleInputChange('fechaGestion', e.value)} disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
+        </div>
+        <div className="col-12 md:col-12">
+            <label htmlFor="causalRechazo" className="block text-900 font-medium mb-2">
+                Causal de Rechazo
+            </label>
+            <Dropdown
+                id="causalRechazo"
+                value={formData.causalRechazo}
+                options={[
+                    { label: '1 - Documentación incompleta o ilegible', value: '1' },
+                    { label: '2 - Incapacidad no expedida por médico autorizado', value: '2' },
+                    { label: '3 - Fecha de expedición posterior al periodo de incapacidad', value: '3' },
+                    { label: '4 - Diagnóstico no corresponde con el tipo de incapacidad', value: '4' },
+                    { label: '5 - Incapacidad no reportada en los tiempos establecidos', value: '5' },
+                    { label: '6 - Beneficiario no afiliado o con afiliación suspendida', value: '6' },
+                    { label: '7 - Periodo de incapacidad ya cubierto o duplicado', value: '7' },
+                    { label: '8 - Incapacidad por enfermedad laboral sin calificación', value: '8' },
+                    { label: '9 - Formato de incapacidad no válido o alterado', value: '9' }
+                ]}
+                onChange={(e) => handleInputChange('causalRechazo', e.value)}
+                disabled={!isEditing}
+                className="w-full"
+            />
+        </div>
+        <div className="col-12 md:col-12">
+            <label htmlFor="observaciones" className="block text-900 font-medium mb-2">
+                Observaciones
+            </label>
+            <InputTextarea id="observaciones" value={formData.observaciones || ''} onChange={(e) => handleInputChange('observaciones', e.target.value)} disabled={!isEditing} className="w-full" rows={4} />
         </div>
     </>
 );
@@ -140,38 +218,19 @@ const MedicalFields = ({ formData, isEditing, handleInputChange }: MedicalFields
             <label htmlFor="codigoDiagnostico" className="block text-900 font-medium mb-2">
                 Código Diagnóstico
             </label>
-            <InputText
-                id="codigoDiagnostico"
-                value={formData.codigoDiagnostico || ''}
-                onChange={(e) => handleInputChange('codigoDiagnostico', e.target.value)}
-                disabled={!isEditing}
-                className="w-full"
-            />
+            <InputText id="codigoDiagnostico" value={formData.codigoDiagnostico || ''} onChange={(e) => handleInputChange('codigoDiagnostico', e.target.value)} disabled={!isEditing} className="w-full" />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="nombreDiagnostico" className="block text-900 font-medium mb-2">
                 Nombre Diagnóstico
             </label>
-            <InputText
-                id="nombreDiagnostico"
-                value={formData.nombreDiagnostico || ''}
-                onChange={(e) => handleInputChange('nombreDiagnostico', e.target.value)}
-                disabled={!isEditing}
-                className="w-full"
-            />
+            <InputText id="nombreDiagnostico" value={formData.nombreDiagnostico || ''} onChange={(e) => handleInputChange('nombreDiagnostico', e.target.value)} disabled={!isEditing} className="w-full" />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="diasAcumulados" className="block text-900 font-medium mb-2">
                 Días Acumulados
             </label>
-            <InputNumber
-                id="diasAcumulados"
-                value={formData.diasAcumulados || 0}
-                onValueChange={(e) => handleInputChange('diasAcumulados', e.value)}
-                disabled={!isEditing}
-                className="w-full"
-                min={0}
-            />
+            <InputNumber id="diasAcumulados" value={formData.diasAcumulados || 0} onValueChange={(e) => handleInputChange('diasAcumulados', e.value)} disabled={!isEditing} className="w-full" min={0} />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="entidadPrestadora" className="block text-900 font-medium mb-2">
@@ -191,8 +250,22 @@ const MedicalFields = ({ formData, isEditing, handleInputChange }: MedicalFields
             />
         </div>
         <div className="col-12 md:col-6">
+            <label htmlFor="fechaPagoIncapacidadTrabajador" className="block text-900 font-medium mb-2">
+                Fecha de pago de incapacidad al trabajador
+            </label>
+            <Calendar
+                id="fechaPagoIncapacidadTrabajador"
+                value={formData.fechaPagoIncapacidadTrabajador}
+                onChange={(e) => handleInputChange('fechaPagoIncapacidadTrabajador', e.value)}
+                disabled={!isEditing}
+                dateFormat="dd/mm/yy"
+                className="w-full"
+                showIcon
+            />
+        </div>
+        <div className="col-12 md:col-6">
             <label htmlFor="valorEsperadoRecaudo" className="block text-900 font-medium mb-2">
-                Valor Esperado
+                Valor Esperado de Recaudo
             </label>
             <InputNumber
                 id="valorEsperadoRecaudo"
@@ -331,7 +404,7 @@ export default function IncapacidadDetallePage() {
                     }
                 ];
 
-                const incapacidadEncontrada = datosEjemplo.find(inc => inc.id === incapacidadId);
+                const incapacidadEncontrada = datosEjemplo.find((inc) => inc.id === incapacidadId);
                 if (incapacidadEncontrada) {
                     setIncapacidad(incapacidadEncontrada);
                     setFormData(incapacidadEncontrada);
@@ -342,7 +415,7 @@ export default function IncapacidadDetallePage() {
     }, [incapacidadId]);
 
     const handleInputChange = (field: string, value: any) => {
-        setFormData(prev => prev ? { ...prev, [field]: value } : null);
+        setFormData((prev) => (prev ? { ...prev, [field]: value } : null));
     };
 
     const handleSave = async () => {
@@ -423,9 +496,7 @@ export default function IncapacidadDetallePage() {
                                 <label htmlFor="nombresApellidos" className="block text-900 font-medium mb-2">
                                     Nombres y Apellidos
                                 </label>
-                                <InputText id="nombresApellidos" value={formData.nombresApellidos} 
-                                    onChange={(e) => handleInputChange('nombresApellidos', e.target.value)} 
-                                    disabled={!isEditing} className="w-full" />
+                                <InputText id="nombresApellidos" value={formData.nombresApellidos} onChange={(e) => handleInputChange('nombresApellidos', e.target.value)} disabled={!isEditing} className="w-full" />
                             </div>
                             <div className="col-12 md:col-3">
                                 <label htmlFor="tipoDocumento" className="block text-900 font-medium mb-2">
@@ -456,23 +527,21 @@ export default function IncapacidadDetallePage() {
                                 <label htmlFor="numeroDocumento" className="block text-900 font-medium mb-2">
                                     {isMobile ? 'N° Documento' : 'Número de Documento'}
                                 </label>
-                                <InputText id="numeroDocumento" value={formData.numeroDocumento} 
-                                    onChange={(e) => handleInputChange('numeroDocumento', e.target.value)} 
-                                    disabled={!isEditing} className="w-full" />
+                                <InputText id="numeroDocumento" value={formData.numeroDocumento} onChange={(e) => handleInputChange('numeroDocumento', e.target.value)} disabled={!isEditing} className="w-full" />
                             </div>
                             <div className="col-12 md:col-4">
                                 <label htmlFor="fechaNacimiento" className="block text-900 font-medium mb-2">
                                     Fecha Nacimiento
                                 </label>
-                                <Calendar id="fechaNacimiento" value={formData.fechaNacimiento} 
-                                    onChange={(e) => handleInputChange('fechaNacimiento', e.value)} 
-                                    disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
+                                <Calendar id="fechaNacimiento" value={formData.fechaNacimiento} onChange={(e) => handleInputChange('fechaNacimiento', e.value)} disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
                             </div>
                             <div className="col-12 md:col-4">
                                 <label htmlFor="epsAfiliada" className="block text-900 font-medium mb-2">
                                     EPS Afiliada
                                 </label>
-                                <Dropdown id="epsAfiliada" value={formData.epsAfiliada} 
+                                <Dropdown
+                                    id="epsAfiliada"
+                                    value={formData.epsAfiliada}
                                     options={[
                                         { label: 'SURA EPS', value: 'SURA EPS' },
                                         { label: 'COMPENSAR EPS', value: 'COMPENSAR EPS' },
@@ -481,8 +550,10 @@ export default function IncapacidadDetallePage() {
                                         { label: 'FAMISANAR EPS', value: 'FAMISANAR EPS' },
                                         { label: 'MEDIMÁS EPS', value: 'MEDIMÁS EPS' }
                                     ]}
-                                    onChange={(e) => handleInputChange('epsAfiliada', e.value)} 
-                                    disabled={!isEditing} className="w-full" />
+                                    onChange={(e) => handleInputChange('epsAfiliada', e.value)}
+                                    disabled={!isEditing}
+                                    className="w-full"
+                                />
                             </div>
                             <div className="col-12 md:col-4">
                                 <label htmlFor="salarioEmpleado" className="block text-900 font-medium mb-2">
@@ -505,17 +576,13 @@ export default function IncapacidadDetallePage() {
                                 <label htmlFor="correoElectronico" className="block text-900 font-medium mb-2">
                                     Correo Electrónico
                                 </label>
-                                <InputText id="correoElectronico" value={formData.correoElectronico} 
-                                    onChange={(e) => handleInputChange('correoElectronico', e.target.value)} 
-                                    disabled={!isEditing} className="w-full" type="email" />
+                                <InputText id="correoElectronico" value={formData.correoElectronico} onChange={(e) => handleInputChange('correoElectronico', e.target.value)} disabled={!isEditing} className="w-full" type="email" />
                             </div>
                             <div className="col-12 md:col-6">
                                 <label htmlFor="numeroTelefono" className="block text-900 font-medium mb-2">
                                     Teléfono
                                 </label>
-                                <InputText id="numeroTelefono" value={formData.numeroTelefono || ''} 
-                                    onChange={(e) => handleInputChange('numeroTelefono', e.target.value)} 
-                                    disabled={!isEditing} className="w-full" />
+                                <InputText id="numeroTelefono" value={formData.numeroTelefono || ''} onChange={(e) => handleInputChange('numeroTelefono', e.target.value)} disabled={!isEditing} className="w-full" />
                             </div>
                         </div>
                     </Card>
@@ -526,23 +593,29 @@ export default function IncapacidadDetallePage() {
                                 <label htmlFor="fechaInicioIncapacidad" className="block text-900 font-medium mb-2">
                                     Fecha Inicio
                                 </label>
-                                <Calendar id="fechaInicioIncapacidad" value={formData.fechaInicioIncapacidad} 
-                                    onChange={(e) => handleInputChange('fechaInicioIncapacidad', e.value)} 
-                                    disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
+                                <Calendar
+                                    id="fechaInicioIncapacidad"
+                                    value={formData.fechaInicioIncapacidad}
+                                    onChange={(e) => handleInputChange('fechaInicioIncapacidad', e.value)}
+                                    disabled={!isEditing}
+                                    dateFormat="dd/mm/yy"
+                                    className="w-full"
+                                    showIcon
+                                />
                             </div>
                             <div className="col-12 md:col-4">
                                 <label htmlFor="fechaRadicacion" className="block text-900 font-medium mb-2">
                                     Fecha Radicación
                                 </label>
-                                <Calendar id="fechaRadicacion" value={formData.fechaRadicacion} 
-                                    onChange={(e) => handleInputChange('fechaRadicacion', e.value)} 
-                                    disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
+                                <Calendar id="fechaRadicacion" value={formData.fechaRadicacion} onChange={(e) => handleInputChange('fechaRadicacion', e.value)} disabled={!isEditing} dateFormat="dd/mm/yy" className="w-full" showIcon />
                             </div>
                             <div className="col-12 md:col-4">
                                 <label htmlFor="estado" className="block text-900 font-medium mb-2">
                                     Estado
                                 </label>
-                                <Dropdown id="estado" value={formData.estado} 
+                                <Dropdown
+                                    id="estado"
+                                    value={formData.estado}
                                     options={[
                                         { label: 'En trámite', value: 'En trámite' },
                                         { label: 'Pagada', value: 'Pagada' },
@@ -554,29 +627,25 @@ export default function IncapacidadDetallePage() {
                                         { label: 'Gestionada', value: 'Gestionada' },
                                         { label: 'Revisión AlfaPlus', value: 'Revisión AlfaPlus' }
                                     ]}
-                                    onChange={(e) => handleInputChange('estado', e.value)} 
-                                    disabled={!isEditing} className="w-full" />
+                                    onChange={(e) => handleInputChange('estado', e.value)}
+                                    disabled={!isEditing}
+                                    className="w-full"
+                                />
                             </div>
                             <div className="col-12">
                                 <label htmlFor="observaciones" className="block text-900 font-medium mb-2">
                                     Observaciones
                                 </label>
-                                <InputTextarea id="observaciones" value={formData.observaciones || ''} 
-                                    onChange={(e) => handleInputChange('observaciones', e.target.value)} 
-                                    disabled={!isEditing} className="w-full" rows={4} />
+                                <InputTextarea id="observaciones" value={formData.observaciones || ''} onChange={(e) => handleInputChange('observaciones', e.target.value)} disabled={!isEditing} className="w-full" rows={4} />
                             </div>
                             <div className="col-12 md:col-6">
-                                <Checkbox id="tieneHistoriaClinica" checked={formData.tieneHistoriaClinica} 
-                                    onChange={(e) => handleInputChange('tieneHistoriaClinica', e.checked)} 
-                                    disabled={!isEditing} className="mr-2" />
+                                <Checkbox id="tieneHistoriaClinica" checked={formData.tieneHistoriaClinica} onChange={(e) => handleInputChange('tieneHistoriaClinica', e.checked)} disabled={!isEditing} className="mr-2" />
                                 <label htmlFor="tieneHistoriaClinica" className="text-900 font-medium">
                                     Tiene Historia Clínica
                                 </label>
                             </div>
                             <div className="col-12 md:col-6">
-                                <Checkbox id="tieneDocumentosAdicionales" checked={formData.tieneDocumentosAdicionales} 
-                                    onChange={(e) => handleInputChange('tieneDocumentosAdicionales', e.checked)} 
-                                    disabled={!isEditing} className="mr-2" />
+                                <Checkbox id="tieneDocumentosAdicionales" checked={formData.tieneDocumentosAdicionales} onChange={(e) => handleInputChange('tieneDocumentosAdicionales', e.checked)} disabled={!isEditing} className="mr-2" />
                                 <label htmlFor="tieneDocumentosAdicionales" className="text-900 font-medium">
                                     Tiene Documentos Adicionales
                                 </label>
@@ -590,31 +659,40 @@ export default function IncapacidadDetallePage() {
                                 <label className="block text-900 font-medium mb-3">Tipo de Incapacidad</label>
                                 <div className="flex flex-column gap-3">
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="licencia-paternidad" name="tipoIncapacidad" 
-                                            value="licencia-paternidad" 
-                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)} 
-                                            checked={formData.tipoIncapacidad === 'licencia-paternidad'} 
-                                            disabled={!isEditing} />
+                                        <RadioButton
+                                            inputId="licencia-paternidad"
+                                            name="tipoIncapacidad"
+                                            value="licencia-paternidad"
+                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)}
+                                            checked={formData.tipoIncapacidad === 'licencia-paternidad'}
+                                            disabled={!isEditing}
+                                        />
                                         <label htmlFor="licencia-paternidad" className="ml-2 text-900">
-                                            Licencia de Paternidad
+                                            Licencia de Paternidad / Maternidad
                                         </label>
                                     </div>
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="enfermedad-general" name="tipoIncapacidad" 
-                                            value="enfermedad-general" 
-                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)} 
-                                            checked={formData.tipoIncapacidad === 'enfermedad-general'} 
-                                            disabled={!isEditing} />
+                                        <RadioButton
+                                            inputId="enfermedad-general"
+                                            name="tipoIncapacidad"
+                                            value="enfermedad-general"
+                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)}
+                                            checked={formData.tipoIncapacidad === 'enfermedad-general'}
+                                            disabled={!isEditing}
+                                        />
                                         <label htmlFor="enfermedad-general" className="ml-2 text-900">
-                                            Enfermedad General
+                                            Enfermedad General / Accidente de Tránsito
                                         </label>
                                     </div>
                                     <div className="flex align-items-center">
-                                        <RadioButton inputId="accidente-trabajo" name="tipoIncapacidad" 
-                                            value="accidente-trabajo" 
-                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)} 
-                                            checked={formData.tipoIncapacidad === 'accidente-trabajo'} 
-                                            disabled={!isEditing} />
+                                        <RadioButton
+                                            inputId="accidente-trabajo"
+                                            name="tipoIncapacidad"
+                                            value="accidente-trabajo"
+                                            onChange={(e) => handleInputChange('tipoIncapacidad', e.value)}
+                                            checked={formData.tipoIncapacidad === 'accidente-trabajo'}
+                                            disabled={!isEditing}
+                                        />
                                         <label htmlFor="accidente-trabajo" className="ml-2 text-900">
                                             Accidente de Trabajo
                                         </label>
@@ -624,38 +702,158 @@ export default function IncapacidadDetallePage() {
                         </div>
 
                         <div className="grid mt-3">
-                            <CommonIncapacityFields 
-                                formData={formData} 
-                                isEditing={isEditing} 
-                                handleInputChange={handleInputChange} 
-                            />
+                            <CommonIncapacityFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
                         </div>
 
                         {formData.tipoIncapacidad === 'licencia-paternidad' && (
                             <>
                                 <Divider />
-                                <h6 className="text-900 font-semibold mb-3">Licencia de Paternidad</h6>
+                                <h6 className="text-900 font-semibold mb-3">Licencia de Paternidad / Maternidad</h6>
                                 <div className="grid">
                                     <div className="col-12 md:col-6">
                                         <label className="block text-900 font-medium mb-2">Prematuro</label>
-                                        <SelectButton 
-                                            value={null} 
+                                        <SelectButton
+                                            value={null}
                                             options={[
                                                 { label: 'Sí', value: true },
                                                 { label: 'No', value: false }
-                                            ]} 
-                                            className="w-full" 
+                                            ]}
+                                            className="w-full"
                                         />
                                     </div>
                                     <div className="col-12 md:col-6">
                                         <label className="block text-900 font-medium mb-2">Embarazo Múltiple</label>
-                                        <SelectButton 
-                                            value={null} 
+                                        <SelectButton
+                                            value={null}
                                             options={[
                                                 { label: 'Sí', value: true },
                                                 { label: 'No', value: false }
-                                            ]} 
-                                            className="w-full" 
+                                            ]}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="semanaTermino" className="block text-900 font-medium mb-2">
+                                            Semana a término
+                                        </label>
+                                        <Dropdown
+                                            id="semanaTermino"
+                                            value={formData.semanaTermino}
+                                            options={[
+                                                { label: '37', value: '37' },
+                                                { label: '38', value: '38' },
+                                                { label: '39', value: '39' },
+                                                { label: '40', value: '40' }
+                                            ]}
+                                            onChange={(e) => handleInputChange('semanaTermino', e.value)}
+                                            disabled={!isEditing}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="edadGestacional" className="block text-900 font-medium mb-2">
+                                            Edad Gestacional
+                                        </label>
+                                        <Dropdown
+                                            id="edadGestacional"
+                                            value={formData.edadGestacional}
+                                            options={[
+                                                { label: '26', value: '26' },
+                                                { label: '27', value: '27' },
+                                                { label: '28', value: '28' },
+                                                { label: '29', value: '29' },
+                                                { label: '30', value: '30' },
+                                                { label: '31', value: '31' },
+                                                { label: '32', value: '32' },
+                                                { label: '33', value: '33' },
+                                                { label: '34', value: '34' },
+                                                { label: '35', value: '35' },
+                                                { label: '36', value: '36' }
+                                            ]}
+                                            onChange={(e) => handleInputChange('edadGestacional', e.value)}
+                                            disabled={!isEditing}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="diasCotizados" className="block text-900 font-medium mb-2">
+                                            Días Cotizados
+                                        </label>
+                                        <InputNumber id="diasCotizados" value={formData.diasCotizados || 0} onValueChange={(e) => handleInputChange('diasCotizados', e.value)} disabled={!isEditing} className="w-full" min={0} />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="diasGestacion" className="block text-900 font-medium mb-2">
+                                            Días Gestación
+                                        </label>
+                                        <InputNumber
+                                            id="diasGestacion"
+                                            value={formData.edadGestacional ? formData.edadGestacional * 7 : 0}
+                                            onValueChange={(e) => handleInputChange('diasGestacion', e.value)}
+                                            disabled={true}
+                                            className="w-full"
+                                            min={0}
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="factor" className="block text-900 font-medium mb-2">
+                                            Factor
+                                        </label>
+                                        <InputNumber
+                                            id="diasGestacion"
+                                            value={formData.diasCotizados && formData.diasGestacion ? formData.diasCotizados / formData.diasGestacion : 0}
+                                            onValueChange={(e) => handleInputChange('diasGestacion', e.value)}
+                                            disabled={true}
+                                            className="w-full"
+                                            min={0}
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="totalDiasAOtorgarCalendario" className="block text-900 font-medium mb-2">
+                                            Total Días a Otorgar (Calendario)
+                                        </label>
+                                        <InputNumber
+                                            id="totalDiasAOtorgarCalendario"
+                                            value={formData.totalDiasAOtorgarCalendario || 0}
+                                            onValueChange={(e) => handleInputChange('totalDiasAOtorgarCalendario', e.value)}
+                                            disabled={!isEditing}
+                                            className="w-full"
+                                            min={0}
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="totalDiasAOtorgarHabiles" className="block text-900 font-medium mb-2">
+                                            Total Días a Otorgar (Hábiles)
+                                        </label>
+                                        <InputNumber
+                                            id="totalDiasAOtorgarHabiles"
+                                            value={formData.totalDiasAOtorgarHabiles || 0}
+                                            onValueChange={(e) => handleInputChange('totalDiasAOtorgarHabiles', e.value)}
+                                            disabled={!isEditing}
+                                            className="w-full"
+                                            min={0}
+                                        />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="diasProporcionales" className="block text-900 font-medium mb-2">
+                                            Días Proporcionales
+                                        </label>
+                                        <InputNumber id="diasProporcionales" value={formData.diasProporcionales || 0} onValueChange={(e) => handleInputChange('diasProporcionales', e.value)} disabled={!isEditing} className="w-full" min={0} />
+                                    </div>
+                                    <div className="col-12 md:col-6">
+                                        <label htmlFor="valorLicencia" className="block text-900 font-medium mb-2">
+                                            Valor de Licencia
+                                        </label>
+                                        <InputNumber
+                                            id="valorLicencia"
+                                            value={formData.valorLicencia}
+                                            onValueChange={(e) => handleInputChange('valorLicencia', e.value)}
+                                            disabled={!isEditing}
+                                            mode="currency"
+                                            currency="COP"
+                                            locale="es-CO"
+                                            className="w-full"
+                                            minFractionDigits={0}
+                                            maxFractionDigits={0}
                                         />
                                     </div>
                                 </div>
@@ -665,17 +863,9 @@ export default function IncapacidadDetallePage() {
                         {(formData.tipoIncapacidad === 'enfermedad-general' || formData.tipoIncapacidad === 'accidente-trabajo') && (
                             <>
                                 <Divider />
-                                <h6 className="text-900 font-semibold mb-3">
-                                    {formData.tipoIncapacidad === 'enfermedad-general' 
-                                        ? 'Información Médica' 
-                                        : 'Información del Accidente'}
-                                </h6>
+                                <h6 className="text-900 font-semibold mb-3">{formData.tipoIncapacidad === 'enfermedad-general' ? 'Información Médica' : 'Información del Accidente'}</h6>
                                 <div className="grid">
-                                    <MedicalFields 
-                                        formData={formData} 
-                                        isEditing={isEditing} 
-                                        handleInputChange={handleInputChange} 
-                                    />
+                                    <MedicalFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
                                 </div>
                             </>
                         )}
@@ -730,7 +920,6 @@ export default function IncapacidadDetallePage() {
                     <Card title="Acciones Rápidas">
                         <div className="flex flex-column gap-2">
                             <Button label="Descargar PDF" icon="pi pi-download" className="w-full" outlined />
-                            <Button label="Enviar Notificación" icon="pi pi-send" className="w-full" outlined />
                             <Button label="Generar Reporte" icon="pi pi-file-excel" className="w-full" outlined />
                         </div>
                     </Card>
