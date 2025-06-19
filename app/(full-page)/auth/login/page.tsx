@@ -112,13 +112,13 @@ const LoginPage = () => {
                             {!showIncapacidadForm ? (
                                 <div>
                                     <label htmlFor="user" className="block text-900 text-xl font-medium mb-2">
-                                        Email
+                                        Usuario
                                     </label>
                                     <InputText id="user" type="text" placeholder="Usuario" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
                                     <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                                         Contraseña
                                     </label>
-                                    <Password inputId="password1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingrese su contraseña" toggleMask className="w-full mb-5" inputClassName="w-full p-3 md:w-30rem" />
+                                    <Password inputId="password1" feedback={false} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Ingrese su contraseña" toggleMask className="w-full mb-5" inputClassName="w-full p-3 md:w-30rem" />
                                     <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                         <div className="flex align-items-center">
                                             <Checkbox inputId="rememberme1" checked={checked} onChange={(e) => setChecked(e.checked ?? false)} className="mr-2" />
