@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -14,8 +14,8 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Checkbox } from 'primereact/checkbox';
 import { RadioButton } from 'primereact/radiobutton';
 import { Toast } from 'primereact/toast';
-import { useRef } from 'react';
 import { SelectButton } from 'primereact/selectbutton';
+import { AutoComplete } from 'primereact/autocomplete';
 
 interface Incapacidad {
     id: string;
@@ -213,9 +213,11 @@ interface MedicalFieldsProps {
     formData: Incapacidad;
     isEditing: boolean;
     handleInputChange: (field: string, value: any) => void;
+    filteredDiagnosticoOptions: string[];
+    searchDiagnostico: (event: { query: string }) => void;
 }
 
-const MedicalFields = ({ formData, isEditing, handleInputChange }: MedicalFieldsProps) => (
+const MedicalFields = ({ formData, isEditing, handleInputChange, filteredDiagnosticoOptions, searchDiagnostico }: MedicalFieldsProps) => (
     <>
         <div className="col-12 md:col-6">
             <label htmlFor="codigoDiagnostico" className="block text-900 font-medium mb-2">
@@ -227,7 +229,16 @@ const MedicalFields = ({ formData, isEditing, handleInputChange }: MedicalFields
             <label htmlFor="nombreDiagnostico" className="block text-900 font-medium mb-2">
                 Nombre Diagnóstico
             </label>
-            <InputText id="nombreDiagnostico" value={formData.nombreDiagnostico || ''} onChange={(e) => handleInputChange('nombreDiagnostico', e.target.value)} disabled={!isEditing} className="w-full" />
+            <AutoComplete
+                id="nombreDiagnostico"
+                value={formData.nombreDiagnostico || ''}
+                suggestions={filteredDiagnosticoOptions}
+                completeMethod={searchDiagnostico}
+                onChange={(e) => handleInputChange('nombreDiagnostico', e.value)}
+                disabled={!isEditing}
+                dropdown
+                className="w-full"
+            />
         </div>
         <div className="col-12 md:col-6">
             <label htmlFor="diasAcumulados" className="block text-900 font-medium mb-2">
@@ -298,6 +309,39 @@ export default function IncapacidadDetallePage() {
     const [loading, setLoading] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
 
+    const [epsOptions, setEpsOptions] = useState<string[]>([]);
+    const [filteredEpsOptions, setFilteredEpsOptions] = useState<string[]>([]);
+    const [diagnosticoOptions, setDiagnosticoOptions] = useState<string[]>([]);
+    const [filteredDiagnosticoOptions, setFilteredDiagnosticoOptions] = useState<string[]>([]);
+
+    const searchEps = (event: { query: string }) => {
+        setTimeout(() => {
+            let filteredOptions;
+            if (!event.query.trim().length) {
+                filteredOptions = [...epsOptions];
+            } else {
+                filteredOptions = epsOptions.filter((eps) => {
+                    return eps.toLowerCase().includes(event.query.toLowerCase());
+                });
+            }
+            setFilteredEpsOptions(filteredOptions);
+        }, 250);
+    };
+
+    const searchDiagnostico = (event: { query: string }) => {
+        setTimeout(() => {
+            let filteredOptions;
+            if (!event.query.trim().length) {
+                filteredOptions = [...diagnosticoOptions];
+            } else {
+                filteredOptions = diagnosticoOptions.filter((diagnostico) => {
+                    return diagnostico.toLowerCase().includes(event.query.toLowerCase());
+                });
+            }
+            setFilteredDiagnosticoOptions(filteredOptions);
+        }, 250);
+    };
+
     useEffect(() => {
         const checkScreenSize = () => setIsMobile(window.innerWidth < 768);
         checkScreenSize();
@@ -306,6 +350,34 @@ export default function IncapacidadDetallePage() {
     }, []);
 
     useEffect(() => {
+        setEpsOptions([
+            'SURA EPS', 
+            'COMPENSAR EPS', 
+            'NUEVA EPS', 
+            'SANITAS EPS', 
+            'FAMISANAR EPS', 
+            'MEDIMÁS EPS',
+            'COOMEVA EPS',
+            'SALUD TOTAL EPS',
+            'CAFESALUD EPS',
+            'COMFENALCO EPS',
+            'SOS EPS',
+            'ALIANSALUD EPS'
+        ]);
+
+        setDiagnosticoOptions([
+            'Fractura de muñeca izquierda',
+            'Lumbalgia',
+            'Bronquitis aguda',
+            'Cirugía de apendicitis',
+            'Gastritis aguda',
+            'Migraña crónica',
+            'Hipertensión arterial',
+            'Diabetes mellitus tipo 2',
+            'Artrosis de rodilla',
+            'Esguince de tobillo grado II'
+        ]);
+
         if (incapacidadId) {
             setTimeout(() => {
                 const datosEjemplo: Incapacidad[] = [
@@ -542,19 +614,14 @@ export default function IncapacidadDetallePage() {
                                 <label htmlFor="epsAfiliada" className="block text-900 font-medium mb-2">
                                     EPS Afiliada
                                 </label>
-                                <Dropdown
+                                <AutoComplete
                                     id="epsAfiliada"
                                     value={formData.epsAfiliada}
-                                    options={[
-                                        { label: 'SURA EPS', value: 'SURA EPS' },
-                                        { label: 'COMPENSAR EPS', value: 'COMPENSAR EPS' },
-                                        { label: 'NUEVA EPS', value: 'NUEVA EPS' },
-                                        { label: 'SANITAS EPS', value: 'SANITAS EPS' },
-                                        { label: 'FAMISANAR EPS', value: 'FAMISANAR EPS' },
-                                        { label: 'MEDIMÁS EPS', value: 'MEDIMÁS EPS' }
-                                    ]}
+                                    suggestions={filteredEpsOptions}
+                                    completeMethod={searchEps}
                                     onChange={(e) => handleInputChange('epsAfiliada', e.value)}
                                     disabled={!isEditing}
+                                    dropdown
                                     className="w-full"
                                 />
                             </div>
@@ -862,13 +929,18 @@ export default function IncapacidadDetallePage() {
                                 </div>
                             </>
                         )}
-
                         {formData.tipoIncapacidad === 'enfermedad-general' && (
                             <>
                                 <Divider />
                                 <h6 className="text-900 font-semibold mb-3">Información Médica</h6>
                                 <div className="grid">
-                                    <MedicalFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
+                                    <MedicalFields
+                                        formData={formData}
+                                        isEditing={isEditing}
+                                        handleInputChange={handleInputChange}
+                                        filteredDiagnosticoOptions={filteredDiagnosticoOptions}
+                                        searchDiagnostico={searchDiagnostico}
+                                    />
                                 </div>
                             </>
                         )}
@@ -879,7 +951,13 @@ export default function IncapacidadDetallePage() {
                                 <h6 className="text-900 font-semibold mb-3">Información Médica</h6>
                                 <div className="grid">
                                     <div className="grid">
-                                        <MedicalFields formData={formData} isEditing={isEditing} handleInputChange={handleInputChange} />
+                                        <MedicalFields
+                                            formData={formData}
+                                            isEditing={isEditing}
+                                            handleInputChange={handleInputChange}
+                                            filteredDiagnosticoOptions={filteredDiagnosticoOptions}
+                                            searchDiagnostico={searchDiagnostico}
+                                        />
                                     </div>
                                     <div className="col-12 md:col-6">
                                         <label htmlFor="fechaAccidente" className="block text-900 font-medium mb-2">
