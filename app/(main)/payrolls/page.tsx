@@ -9,11 +9,11 @@ import { Tag } from 'primereact/tag';
 import { Calendar } from 'primereact/calendar';
 import { FilterMatchMode } from 'primereact/api';
 import { dummyData, Historial, Empleado } from './dummyData';
-import { useRouter } from 'next/navigation';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 import { Dialog } from 'primereact/dialog';
 import ManualPayrollForm from './components/ManualPayrollForm';
+
 const estadoOptions = [
   { label: 'Todos', value: null },
   { label: 'Activo', value: 'Activo' },
@@ -22,14 +22,17 @@ const estadoOptions = [
 ];
 
 const Payrolls = () => {
-  const [filtroNIT, setFiltroNIT] = useState('');
+  const [nitFilter, setNitFilter] = useState('');
   const [globalFilterValue, setGlobalFilterValue] = useState('');
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [selectedEmpleado, setSelectedEmployee] = useState<Empleado | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [manualUploadModal, setManualUploadModal] = useState(false);
+  const [employeeHistoryModal, setEmployeeHistoryModal] = useState(false);
+  const [employeeHistory, setEmployeeHistory] = useState<Historial[]>([]);
+  const [employeeName, setEmployeeName] = useState('');
   const toast = useRef<Toast>(null);
-  const router = useRouter();
+  
   const [filters, setFilters] = useState({
     global: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
     estado: { value: null as string | null, matchMode: FilterMatchMode.EQUALS }
@@ -37,24 +40,24 @@ const Payrolls = () => {
 
   const formatDate = (str: string) => new Date(str + 'T00:00:00');
 
-  const filtrarPorPeriodo = (h: Historial) => {
+  const filterPerPeriod = (h: Historial) => {
     if (!dateRange[0] || !dateRange[1]) return true;
-    const fecha = formatDate(h.fechaCargue);
-    return fecha >= dateRange[0]! && fecha <= dateRange[1]!;
+    const date = formatDate(h.fechaCargue);
+    return date >= dateRange[0]! && date <= dateRange[1]!;
   };
 
-  const obtenerUltimoHistorial = (historial: Historial[]): Historial =>
+  const takeLastHistory = (historial: Historial[]): Historial =>
     [...historial].sort((a, b) => b.fechaCargue.localeCompare(a.fechaCargue))[0];
 
   const data = dummyData
     .map((emp) => {
-      const historialFiltrado = emp.historial.filter(filtrarPorPeriodo);
-      if (historialFiltrado.length === 0) return null;
-      const ultimo = obtenerUltimoHistorial(historialFiltrado);
-      return { ...ultimo, nombre: emp.nombre, cedula: emp.cedula };
+      const historyFilter = emp.historial.filter(filterPerPeriod);
+      if (historyFilter.length === 0) return null;
+      const last = takeLastHistory(historyFilter);
+      return { ...last, nombre: emp.nombre, cedula: emp.cedula };
     })
     .filter((item) => item !== null)
-    .filter((h) => !filtroNIT || h!.nit.includes(filtroNIT));
+    .filter((h) => !nitFilter || h!.nit.includes(nitFilter));
 
   const renderHeader = () => (
     <div className="flex flex-column sm:flex-row sm:align-items-center gap-3 p-4 flex-wrap">
@@ -70,9 +73,9 @@ const Payrolls = () => {
             estado: { value: null, matchMode: FilterMatchMode.EQUALS }
           });
           setGlobalFilterValue('');
-          setFiltroNIT('');
+          setNitFilter('');
           setDateRange([null, null]);
-          setSelectedEmployee(null); // NUEVO
+          setSelectedEmployee(null);
         }}
       />
       <InputText
@@ -87,8 +90,8 @@ const Payrolls = () => {
       />
       <InputText
         placeholder="NIT..."
-        value={filtroNIT}
-        onChange={(e) => setFiltroNIT(e.target.value)}
+        value={nitFilter}
+        onChange={(e) => setNitFilter(e.target.value)}
         className="p-inputtext-sm"
       />
       <Dropdown
@@ -143,6 +146,62 @@ const Payrolls = () => {
     </div>
   );
 
+  const handleRowSelect = (e: any) => {
+    const empleado = dummyData.find(emp => emp.cedula === e.data.cedula);
+    if (empleado) {
+      setEmployeeName(empleado.nombre);
+      setEmployeeHistory(empleado.historial.sort((a, b) => b.fechaCargue.localeCompare(a.fechaCargue)));
+      setEmployeeHistoryModal(true);
+    }
+  };
+
+  const renderEmployeeHistory = () => {
+    const estadoBody = (row: any) => {
+      const sev = row.estado === 'Activo' ? 'success' : row.estado === 'Retirado' ? 'danger' : 'info';
+      return <Tag value={row.estado} severity={sev} />;
+    };
+
+    const salaryBody = (row: any) => (
+      <div className="text-right">
+        {new Intl.NumberFormat('es-CO', {
+          style: 'currency',
+          currency: 'COP',
+          minimumFractionDigits: 0
+        }).format(row.salario)}
+      </div>
+    );
+
+    const dateTemplate = (row: any, field: string) => (
+      <span>{row[field] || '-'}</span>
+    );
+
+    return (
+      <div className="card">
+        
+        <DataTable
+          value={employeeHistory}
+          className="p-datatable-sm p-datatable-striped"
+          size="small"
+          showGridlines
+          emptyMessage="Sin historial"
+          paginator rows={10}
+          rowsPerPageOptions={[5, 10, 25]}
+          
+        >
+          <Column field="fechaCargue" header="Fecha Cargue" sortable/>
+          <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => dateTemplate(row, 'fechaRetiro')} />
+          <Column field="estado" header="Estado" body={estadoBody} sortable />
+          <Column field="centroCosto" header="Centro Costo" sortable/>
+          <Column field="eps" header="EPS" sortable/>
+          <Column field="salario" header="Salario" sortable body={salaryBody} />
+          <Column field="tipoContrato" header="Tipo Contrato" sortable />
+          <Column field="cargo" header="Cargo" />
+          <Column field="nit" header="NIT" />
+        </DataTable>
+      </div>
+    );
+  };
+
   return (
     <div className="col-12">
       <div className="card">
@@ -150,7 +209,7 @@ const Payrolls = () => {
 
         <DataTable
           value={data}
-          paginator rows={5}
+          paginator rows={10}
           rowsPerPageOptions={[5, 10, 25]}
           className="p-datatable-gridlines"
           dataKey="cedula"
@@ -164,10 +223,7 @@ const Payrolls = () => {
           removableSort
           showGridlines
           selectionMode="single"
-          onRowSelect={(e) => {
-            router.push(`/payrolls/employeeHistory?id=${e.data.cedula}`);
-
-          }}
+          onRowSelect={handleRowSelect}
         >
           <Column field="nombre" header="Empleado" sortable />
           <Column field="cedula" header="N° documento" sortable />
@@ -211,10 +267,21 @@ const Payrolls = () => {
             emptyTemplate={<p className="m-0">Arrastre y suelte los archivos aquí o haga clic para seleccionar.</p>}
           />
         </Dialog>
-         <ManualPayrollForm 
-        visible={manualUploadModal}
-        onHide={() => setManualUploadModal(false)}
-      />
+
+        <Dialog
+          header={`Historial de nómina - ${employeeName}`}
+          visible={employeeHistoryModal}
+          style={{ width: '75vw' }}
+          onHide={() => setEmployeeHistoryModal(false)}
+          modal
+        >
+          {renderEmployeeHistory()}
+        </Dialog>
+
+        <ManualPayrollForm 
+          visible={manualUploadModal}
+          onHide={() => setManualUploadModal(false)}
+        />
       </div>
     </div>
   );
