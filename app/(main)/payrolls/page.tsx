@@ -32,7 +32,7 @@ const Payrolls = () => {
   const [employeeHistory, setEmployeeHistory] = useState<Historial[]>([]);
   const [employeeName, setEmployeeName] = useState('');
   const toast = useRef<Toast>(null);
-  
+
   const [filters, setFilters] = useState({
     global: { value: null as string | null, matchMode: FilterMatchMode.CONTAINS },
     estado: { value: null as string | null, matchMode: FilterMatchMode.EQUALS }
@@ -60,7 +60,7 @@ const Payrolls = () => {
     .filter((h) => !nitFilter || h!.nit.includes(nitFilter));
 
   const renderHeader = () => (
-    <div className="flex flex-column sm:flex-row sm:align-items-center gap-3 p-4 flex-wrap">
+    <div className="flex flex-column sm:flex-row sm:align-items-center gap-2 p-2 flex-wrap">
       <Button
         type="button"
         icon="pi pi-filter-slash"
@@ -120,8 +120,8 @@ const Payrolls = () => {
       />
       <Button
         label="Cargue manual"
-        icon="pi pi-upload"
-        className="p-button-primary p-button-sm"
+        icon="pi pi-folder-open"
+        className="p-button-secondary p-button-sm"
         onClick={() => setManualUploadModal(true)}
       />
     </div>
@@ -177,27 +177,29 @@ const Payrolls = () => {
 
     return (
       <div className="card">
-        
-        <DataTable
-          value={employeeHistory}
-          className="p-datatable-sm p-datatable-striped"
-          size="small"
-          showGridlines
-          emptyMessage="Sin historial"
-          paginator rows={10}
-          rowsPerPageOptions={[5, 10, 25]}
-          
-        >
-          <Column field="fechaCargue" header="Fecha Cargue" sortable/>
-          <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => dateTemplate(row, 'fechaRetiro')} />
-          <Column field="estado" header="Estado" body={estadoBody} sortable />
-          <Column field="centroCosto" header="Centro Costo" sortable/>
-          <Column field="eps" header="EPS" sortable/>
-          <Column field="salario" header="Salario" sortable body={salaryBody} />
-          <Column field="tipoContrato" header="Tipo Contrato" sortable />
-          <Column field="cargo" header="Cargo" />
-          <Column field="nit" header="NIT" />
-        </DataTable>
+        <div className="flex flex-column sm:flex-row sm:align-items-center gap-2 p-2 flex-wrap">
+          <Button label="Exportar Excel" icon="pi pi-file-excel" className="p-button-success p-button-sm" />
+          <DataTable
+            value={employeeHistory}
+            className="p-datatable-sm p-datatable-striped"
+            size="small"
+            showGridlines
+            emptyMessage="Sin historial"
+            paginator rows={10}
+            rowsPerPageOptions={[5, 10, 25]}
+
+          >
+            <Column field="fechaCargue" header="Fecha Cargue" sortable />
+            <Column field="fechaRetiro" header="Fecha Retiro" sortable body={(row) => dateTemplate(row, 'fechaRetiro')} />
+            <Column field="estado" header="Estado" body={estadoBody} sortable />
+            <Column field="centroCosto" header="Centro Costo" sortable />
+            <Column field="eps" header="EPS" sortable />
+            <Column field="salario" header="Salario" sortable body={salaryBody} />
+            <Column field="tipoContrato" header="Tipo Contrato" sortable />
+            <Column field="cargo" header="Cargo" />
+            <Column field="nit" header="NIT" />
+          </DataTable>
+        </div>
       </div>
     );
   };
@@ -278,7 +280,7 @@ const Payrolls = () => {
           {renderEmployeeHistory()}
         </Dialog>
 
-        <ManualPayrollForm 
+        <ManualPayrollForm
           visible={manualUploadModal}
           onHide={() => setManualUploadModal(false)}
         />

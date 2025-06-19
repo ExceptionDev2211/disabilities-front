@@ -83,7 +83,8 @@ const EmployeesInfo = () => {
       empresas: ['Empresa A', 'Empresa B', 'Empresa C'],
       incapacidadesProcesadas: 45,
       promedioTiempo: 2.3,
-      eficiencia: 92
+      eficiencia: 92,
+      horaConexion: '08:00'
       
     },
     {
@@ -99,7 +100,8 @@ const EmployeesInfo = () => {
       empresas: ['Empresa D', 'Empresa E'],
       incapacidadesProcesadas: 28,
       promedioTiempo: 3.1,
-      eficiencia: 85
+      eficiencia: 85,
+      horaConexion: '08:32'
     }
   ])
 
@@ -279,7 +281,8 @@ const EmployeesInfo = () => {
           id: newId,
           fechaNacimiento: employeeData.fechaNacimiento as Date,
           fechaInicio: employeeData.fechaInicio as Date,
-          fechaFin: employeeData.fechaFin as Date
+          fechaFin: employeeData.fechaFin as Date,
+          horaConexion: '08:00'
         }
       ])
       showSuccess('Analista agregado correctamente')
@@ -428,11 +431,15 @@ const EmployeesInfo = () => {
                             <span className="text-600">Incapacidades tramitadas:</span>
                             <span className="font-semibold">{employee.incapacidadesProcesadas}</span>
                           </div>
+                            <div className="flex justify-content-between">
+                            <span className="text-600">Hora de conexión:</span>
+                            <span className="font-semibold">{employee.horaConexion}</span>
+                          </div>
                          {/*  <div className="flex justify-content-between">
                             <span className="text-600">Tiempo promedio:</span>
                             <span className="font-semibold">{employee.promedioTiempo} días</span>
                           </div> */}
-                          <div className="flex justify-content-between align-items-center">
+                          {/* <div className="flex justify-content-between align-items-center">
                             
                             <span className="text-600">Eficiencia:</span>
                             <div className="flex align-items-center gap-2">
@@ -444,7 +451,8 @@ const EmployeesInfo = () => {
                               />
                               <span className="font-semibold text-sm">{employee.eficiencia}%</span>
                             </div> 
-                          </div>
+                          </div> */}
+                          
                         </div>
                         
                         <div className="mt-2">
