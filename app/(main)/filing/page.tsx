@@ -3,6 +3,7 @@ import { Button } from 'primereact/button'
 import { Calendar } from 'primereact/calendar'
 import { Checkbox } from 'primereact/checkbox'
 import { Dialog } from 'primereact/dialog'
+import { Dropdown } from 'primereact/dropdown'
 import { FileUpload } from 'primereact/fileupload'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
@@ -32,37 +33,48 @@ const Filing = () => {
                 <form action="">
                     <div className="p-fluid formgrid grid">
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="firstname2">Nombres y apellidos:</label>
-                            <InputText id="firstname2" type="text" />
+                            <label htmlFor="name ">Nombres y apellidos:</label>
+                            <InputText id="name" type="text" />
                         </div>
 
-                        <div className="field col-12 md:col-3">
-                            <label htmlFor="lastname2">Tipo de documento:  </label>
-                            <InputText id="lastname2" type="text" />
+                        
+                        <div className=" field col-12 md:col-3">
+                            <label htmlFor='documentType'>
+                                Tipo de documento
+                            </label>
+                            <Dropdown
+                                id='documentType'
+                                value={""}
+                                options={[]}
+                                onChange={() =>{}}
+                                className="w-full"
+                                placeholder="Seleccione"
+                            />
                         </div>
                         <div className="field col-12 md:col-3">
-                            <label htmlFor="lastname2">N° de documento: </label>
-                            <InputText id="lastname2" type="text" />
+                            <label htmlFor="documentNumber">N° de documento: </label>
+                            <InputText id="documentNumber" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Fecha de nacimiento: </label>
-                            <InputText id="lastname2" type="text" />
+                            <label htmlFor="birthDate">Fecha de nacimiento: </label>
+                            <InputText id="birthDate" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">EPS afiliada: </label>
-                            <InputText id="lastname2" type="text" />
+                            <label htmlFor="eps">EPS afiliada: </label>
+                            <InputText id="eps" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Correo electrónico (obligatorio):  </label>
-                            <InputText id="lastname2" type="text" />
+                            <label htmlFor="email">Correo electrónico (obligatorio):  </label>
+                            <InputText id="email" type="text" />
                         </div>
                         <div className="field col-12 md:col-6">
-                            <label htmlFor="lastname2">Fecha de inicio de la incapacidad (obligatorio):  </label>
-                            <Calendar showIcon id="lastname2" />
+                            <label htmlFor="disabilityStartDate">Fecha de inicio de la incapacidad (obligatorio):  </label>
+                            <Calendar showIcon id="disabilityStartDate" />
                         </div>
                         <div className="field col-12">
                             <label>Adjuntar incapacidad (obligatorio): </label>
                             <FileUpload
+                                id='fillingFile'
                                 name="soporte"
                                 auto
                                 url={'/api/upload'}
@@ -76,6 +88,7 @@ const Filing = () => {
                         <div className="field col-12">
                             <label>Historia clínica (opcional):</label>
                             <FileUpload
+                                id='medicalHistory'
                                 name="soporte"
                                 url={'/api/upload'}
                                 accept="image/*,application/pdf"
@@ -98,8 +111,8 @@ const Filing = () => {
                         </div>
 
                         <div className="field col-12">
-                            <label htmlFor="address">Observaciones (opcional): </label>
-                            <InputTextarea id="address" rows={4} autoResize />
+                            <label htmlFor="observations">Observaciones (opcional): </label>
+                            <InputTextarea id="observations" rows={4} autoResize />
 
                         </div>
                         <div className="field col-12">
@@ -121,8 +134,7 @@ const Filing = () => {
 
                         </div>
                         <div className=" flex justify-content-end ">
-                            <Button type='button' disabled={!acceptPolicy}
-                                onClick={sendFiling} className='ml-2 border' label="Radicar Incapacidad" icon="pi pi-check" />
+                            <Button type='button' disabled={!acceptPolicy} tooltip={acceptPolicy ? "Acepta política de tratamiento de datos para continuar" : ""} onClick={sendFiling} className='ml-2 border' label="Radicar Incapacidad" />
                         </div>
                         <Dialog
                             header="Política de Tratamiento de Datos Personales"
@@ -131,7 +143,9 @@ const Filing = () => {
                             onHide={() => setPolicyModalVisible(false)}
                             modal
                         >
-                            Al hacer uso de este sistema, usted autoriza el tratamiento de sus datos personales con la finalidad de registrar, gestionar y notificar sobre incapacidades médicas. La información recolectada será tratada conforme a la normativa vigente sobre protección de datos personales.
+                            Al hacer uso de este sistema, usted autoriza el tratamiento de sus datos personales con la finalidad de registrar, 
+                            gestionar y notificar sobre incapacidades médicas. La información recolectada será tratada conforme a la 
+                            normativa vigente sobre protección de datos personales.
                         </Dialog>
 
                         <Toast ref={toast} />

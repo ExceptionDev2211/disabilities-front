@@ -103,7 +103,7 @@ const ManualPayrollForm: React.FC<ManualPayrollFormProps> = ({ visible, onHide }
     { label: 'Cédula de Extranjería', value: 'CE' }
   ];
 
-  const tipoDocEmpleadoOptions: DropdownOption[] = [
+  const documentTypeOptions: DropdownOption[] = [
     { label: 'Ninguno', value: 'Ninguno' },
     { label: 'Carné diplomático', value: 'Carné diplomático' },
     { label: 'Cédula de ciudadanía', value: 'Cédula de ciudadanía' },
@@ -119,13 +119,13 @@ const ManualPayrollForm: React.FC<ManualPayrollFormProps> = ({ visible, onHide }
     { label: 'Tarjeta de identidad', value: 'Tarjeta de identidad' }
   ];
 
-  const estadoEmpleadoOptions: DropdownOption[] = [
+  const employeesStatusOptions: DropdownOption[] = [
     { label: 'Activo', value: 'Activo' },
     { label: 'Retirado', value: 'Retirado' },
     { label: 'En licencia', value: 'En licencia' }
   ];
 
-  const tipoContratoOptions: DropdownOption[] = [
+  const contratTypeOptions: DropdownOption[] = [
     { label: 'Indefinido', value: 'Indefinido' },
     { label: 'Fijo', value: 'Fijo' },
     { label: 'Temporal', value: 'Temporal' }
@@ -456,7 +456,7 @@ const ManualPayrollForm: React.FC<ManualPayrollFormProps> = ({ visible, onHide }
                   </label>
                   <Dropdown
                     value={employeeData.tipoDocumento}
-                    options={tipoDocEmpleadoOptions}
+                    options={documentTypeOptions}
                     onChange={(e) => handleEmployeeChange('tipoDocumento', e.value)}
                     className="w-full"
                     placeholder="Seleccione"
@@ -538,7 +538,7 @@ const ManualPayrollForm: React.FC<ManualPayrollFormProps> = ({ visible, onHide }
                   </label>
                   <Dropdown
                     value={employeeData.estadoEmpleado}
-                    options={estadoEmpleadoOptions}
+                    options={employeesStatusOptions}
                     onChange={(e) => handleEmployeeChange('estadoEmpleado', e.value)}
                     className="w-full"
                     placeholder="Seleccione"
@@ -605,7 +605,7 @@ const ManualPayrollForm: React.FC<ManualPayrollFormProps> = ({ visible, onHide }
                   </label>
                   <Dropdown
                     value={employeeData.tipoContrato}
-                    options={tipoContratoOptions}
+                    options={contratTypeOptions}
                     onChange={(e) => handleEmployeeChange('tipoContrato', e.value)}
                     className="w-full"
                     placeholder="Seleccione"
